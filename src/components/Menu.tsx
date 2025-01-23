@@ -1,4 +1,4 @@
-import menuItems from '@/lib/menuItems'
+import menuItems from '@/lib/menuData'
 import Link from 'next/link'
 import Image from 'next/image'
 

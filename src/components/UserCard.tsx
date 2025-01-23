@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 const UserCard = ({ type }: { type: string }) => {
   return (
-    <div className="rounded-2xl odd:bg-orange-200 even:bg-teal-200 flex-1 p-4">
+    <div className="rounded-2xl odd:bg-green-200 even:bg-purple-200 flex-1 p-4">
       <div className="flex justify-between items-center">
         <span className="text-[10px] bg-white px-2 py-1 rounded-full text-indigo-600">
           2024/2025

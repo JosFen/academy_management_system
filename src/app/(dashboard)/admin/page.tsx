@@ -1,5 +1,7 @@
+import Announcemens from '@/components/Announcemens'
 import AttendanceChart from '@/components/AttendanceChart'
 import BudgetChart from '@/components/BudgetExpenseChart'
+import CoursesRadarChart from '@/components/CoursesRadar'
 import EventCalendar from '@/components/EventCalendar'
 import GenderChart from '@/components/GenderChart'
 import UserCard from '@/components/UserCard'
@@ -16,20 +18,26 @@ const Adminpage = () => {
         </div>
 
         <div className="flex gap-4 flex-col lg:flex-row">
-          <div className="w-full lg:w-1/3 h-[400px]">
+          <div className="w-full lg:w-1/3 h-[450px]">
             <GenderChart />
           </div>
-          <div className="w-full lg:w-2/3 h-[400px]">
+          <div className="w-full lg:w-2/3 h-[450px]">
             <AttendanceChart />
           </div>
         </div>
-        <div className="w-full h-[500px]">
-          <BudgetChart />
+        <div className="flex gap-4 flex-col lg:flex-row">
+          <div className="w-full lg:w-2/3  h-[500px]">
+            <BudgetChart />
+          </div>
+          <div className="w-full lg:w-1/3  h-[500px]">
+            <CoursesRadarChart />
+          </div>
         </div>
       </div>
 
-      <div className="w-full lg:w-1/3 flex flex-col gap-8">
+      <div className="w-full lg:w-1/3 flex flex-col gap-4">
         <EventCalendar />
+        <Announcemens />
       </div>
     </div>
   )

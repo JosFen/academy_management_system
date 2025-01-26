@@ -3,26 +3,29 @@
 @tailwind utilities;
 
 .react-calendar {
-    width: 100% !important;
-    border: none !important;
+  width: 100% !important;
+  border: none !important;
 }
 
 .react-calendar__tile--active {
-    background-color: #fff2b3 !important;
-    color: #000 !important;
+  background-color: #fff2b3 !important;
+  color: #000 !important;
 }
 .react-calendar__tile--now {
-    background-color: #BEDBFE !important;
-    color: #000 !important;
+  background-color: #bedbfe !important;
+  color: #000 !important;
 }
 .react-calendar__navigation__label__labelText {
-    font-weight: bold;
+  font-weight: bold;
 }
 .react-calendar__month-view__weekdays__weekday abbr {
-    text-decoration: none;
-    font-size: 1.1 rem;
+  text-decoration: none;
+  font-size: 1.1 rem;
 }
 .react-calendar__navigation__arrow {
-    font-size: 1.5rem;
-    color: #888;
+  font-size: 1.5rem;
+  color: #888;
+}
+.recharts-text{
+  font-size: x-small;
 }

@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import React, { PureComponent } from 'react'
 import {
   LineChart,
@@ -34,15 +34,22 @@ const BudgetChart = () => {
             bottom: 5
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" stroke='#ddd' />
-          <XAxis dataKey="name" axisLine={false}
+          <CartesianGrid strokeDasharray="3 3" stroke="#ddd" />
+          <XAxis
+            dataKey="name"
+            axisLine={false}
             tickLine={false}
-            tick={{ fill: '#999' }} />
-          <YAxis axisLine={false}
+            tick={{ fill: '#999' }}
+          />
+          <YAxis
+            axisLine={false}
             tickLine={false}
-            tick={{ fill: '#999' }} 
-            tickMargin={10} />
-          <Tooltip contentStyle={{ borderRadius: '10px', borderColor: '#ddd' }} />
+            tick={{ fill: '#999' }}
+            tickMargin={10}
+          />
+          <Tooltip
+            contentStyle={{ borderRadius: '10px', borderColor: '#ddd' }}
+          />
           <Legend
             align="center"
             verticalAlign="top"
@@ -50,15 +57,20 @@ const BudgetChart = () => {
           />
           <Line
             type="monotone"
-            dataKey="Income"
+            dataKey="budget"
             stroke="#81BFDA"
             strokeWidth={2}
           />
-          <Line type="monotone" dataKey="Expense" stroke="#ea9797" strokeWidth={2} />
+          <Line
+            type="monotone"
+            dataKey="expense"
+            stroke="#ea9797"
+            strokeWidth={2}
+          />
         </LineChart>
       </ResponsiveContainer>
     </div>
   )
-};
+}
 
-export default BudgetChart;
+export default BudgetChart

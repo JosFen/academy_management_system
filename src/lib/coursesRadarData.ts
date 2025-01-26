@@ -7,7 +7,7 @@ const coursesRadarData = [
       fullMark: 150,
     },
     {
-      subject: 'Chinese',
+      subject: 'French',
       A: 98,
       B: 130,
       fullMark: 150,
@@ -19,13 +19,13 @@ const coursesRadarData = [
       fullMark: 150,
     },
     {
-      subject: 'Geography',
+      subject: 'Arts',
       A: 99,
       B: 100,
       fullMark: 150,
     },
     {
-      subject: 'Physics',
+      subject: 'Science',
       A: 85,
       B: 90,
       fullMark: 150,

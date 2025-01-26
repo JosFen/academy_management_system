@@ -1,1 +1,1 @@
-# Kindergarten Management System
+# Academy Management System

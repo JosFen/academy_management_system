@@ -19,7 +19,7 @@ export default function DashboardLayout({
         >
           <Image src="/logo.png" alt="logo" width={32} height={32} />
           <span className="hidden lg:block text-xs font-bold">
-            Hedgie Kindergarten
+            Hedgie Academy
           </span>
         </Link>
         <Menu />

@@ -5,7 +5,7 @@ const eventsData = [
   {
     id: 1,
     title: 'Fun Event',
-    time: 'January 1, 2025, 10:00 AM - 11:00 AM', 
+    time: 'January 1, 2025, 10:00 AM - 11:00 AM',
     description: 'Get ready for the first event'
   },
   {

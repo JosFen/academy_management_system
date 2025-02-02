@@ -26,6 +26,52 @@
   font-size: 1.5rem;
   color: #888;
 }
-.recharts-text{
+.recharts-text {
   font-size: x-small;
+}
+
+.rbc-btn-group:first-child  {
+  display: none !important;
+}
+
+.rbc-btn-group:last-child {
+  font-size: 14px !important;
+}
+
+.rbc-btn-group:last-child button {
+  border: none !important;
+  background-color: #f1f0ff !important;
+  margin-left: 2px !important;
+}
+.rbc-toolbar button.rbc-active {
+  background-color: #a6e6ff !important;
+  box-shadow: none !important;
+}
+.rbc-time-view {
+  font-size: clamp(8px, 1vw, 12px);
+}
+.rbc-allday-cell{
+  display: none !important;
+}
+
+.rbc-events-container{
+  width: 100% !important;
+}
+.rbc-time-content {
+  border: none !important;
+}
+
+.rbc-event-label {
+  font-size: clamp(6px, 0.7vw, 10px) !important;  
+  
+}
+.rbc-event-content {
+  font-size:clamp(7px, 1.1vw, 14px) !important;
+  font-weight: bold !important;
+}
+.rbc-event {
+  background-color: #a6e6ff !important;
+  border-radius: 0% !important;
+  border: none !important;
+  color: #666 !important;
 }

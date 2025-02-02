@@ -15,15 +15,10 @@ const EventCalendar = () => {
     <div className="bg-white p-3 rounded-xl">
       <Calendar onChange={onChange} value={value} />
       <div className="flex items-cener justify-between">
-      <div className='flex items-center gap-2'>
-        <h2 className="text-lg font-semibold my-4">Events</h2>
-        <Image
-            src="/calendar.png"
-            alt="calendar"
-            width={15}
-            height={15}
-          />
-          </div>
+        <div className="flex items-center gap-2">
+          <h2 className="text-lg font-semibold my-4">Events</h2>
+          <Image src="/calendar.png" alt="calendar" width={15} height={15} />
+        </div>
         <div className="flex items-center gap-4">
           <Image src="/moreDark.png" alt="more" width={20} height={20} />
         </div>

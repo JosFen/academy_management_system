@@ -20,7 +20,7 @@ const GenderChart = () => {
         <Image src="/moreDark.png" alt="more" width={20} height={20} />
       </div>
       {/* CHART */}
-      <div className="w-full h-[60%] relative">
+      <div className="w-full h-[70%] relative">
         <ResponsiveContainer width="100%" height="100%">
           <RadialBarChart
             cx="50%"

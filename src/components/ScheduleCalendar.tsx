@@ -18,7 +18,7 @@ const ScheduleCalendar = () => {
         events={calendarEvents}
         startAccessor="start"
         endAccessor="end"
-        views={['week', 'day']}
+        views={['month', 'week', 'day']}
         view={view}
         style={{ height: '98%' }}
         onView={handleOnChangeView}

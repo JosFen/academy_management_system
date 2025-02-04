@@ -1,5 +1,7 @@
 // TEMPORARY DATA
 
+import { title } from "process"
+
 export const role = 'teacher'
 
 export const teachersData = [
@@ -1058,6 +1060,152 @@ export const calendarEvents = [
     allDay: false,
     start: new Date(2025, 1, 16, 14, 0),  // Feb 16, 2025, 2:00 PM
     end: new Date(2025, 1, 16, 14, 45)
+  },
+  {
+    title: 'English',
+    allDay: false,
+    start: new Date(2025, 1, 17, 9, 0),  // Feb 17, 2025, 9:00 AM
+    end: new Date(2025, 1, 17, 9, 45)
+  },
+  // March 2025
+  {
+    title: 'Math',
+    allDay: false,
+    start: new Date(2025, 2, 1, 8, 0),  // Mar 1, 2025, 8:00 AM
+    end: new Date(2025, 2, 1, 8, 45)
+  },
+  {
+    title: 'English',
+    allDay: false,
+    start: new Date(2025, 2, 3, 9, 0),  // Mar 3, 2025, 9:00 AM
+    end: new Date(2025, 2, 3, 9, 45)
+  },
+
+  // April 2025
+  {
+    title: 'Biology',
+    allDay: false,
+    start: new Date(2025, 3, 1, 10, 0),  // Apr 1, 2025, 10:00 AM
+    end: new Date(2025, 3, 1, 10, 45)
+  },
+  {
+    title: 'Physics',
+    allDay: false,
+    start: new Date(2025, 3, 5, 11, 0),  // Apr 5, 2025, 11:00 AM
+    end: new Date(2025, 3, 5, 11, 45)
+  },
+
+  // May 2025
+  {
+    title: 'Chemistry',
+    allDay: false,
+    start: new Date(2025, 4, 3, 13, 0),  // May 3, 2025, 1:00 PM
+    end: new Date(2025, 4, 3, 13, 45)
+  },
+  {
+    title: 'History',
+    allDay: false,
+    start: new Date(2025, 4, 10, 14, 0),  // May 10, 2025, 2:00 PM
+    end: new Date(2025, 4, 10, 14, 45)
+  },
+
+  // June 2025
+  {
+    title: 'Math',
+    allDay: false,
+    start: new Date(2025, 5, 1, 8, 0),  // Jun 1, 2025, 8:00 AM
+    end: new Date(2025, 5, 1, 8, 45)
+  },
+  {
+    title: 'English',
+    allDay: false,
+    start: new Date(2025, 5, 4, 9, 0),  // Jun 4, 2025, 9:00 AM
+    end: new Date(2025, 5, 4, 9, 45)
+  },
+
+  // July 2025
+  {
+    title: 'Biology',
+    allDay: false,
+    start: new Date(2025, 6, 2, 10, 0),  // Jul 2, 2025, 10:00 AM
+    end: new Date(2025, 6, 2, 10, 45)
+  },
+  {
+    title: 'Physics',
+    allDay: false,
+    start: new Date(2025, 6, 8, 11, 0),  // Jul 8, 2025, 11:00 AM
+    end: new Date(2025, 6, 8, 11, 45)
+  },
+
+  // August 2025
+  {
+    title: 'Chemistry',
+    allDay: false,
+    start: new Date(2025, 7, 3, 13, 0),  // Aug 3, 2025, 1:00 PM
+    end: new Date(2025, 7, 3, 13, 45)
+  },
+  {
+    title: 'History',
+    allDay: false,
+    start: new Date(2025, 7, 12, 14, 0),  // Aug 12, 2025, 2:00 PM
+    end: new Date(2025, 7, 12, 14, 45)
+  },
+
+  // September 2025
+  {
+    title: 'Math',
+    allDay: false,
+    start: new Date(2025, 8, 1, 8, 0),  // Sep 1, 2025, 8:00 AM
+    end: new Date(2025, 8, 1, 8, 45)
+  },
+  {
+    title: 'English',
+    allDay: false,
+    start: new Date(2025, 8, 5, 9, 0),  // Sep 5, 2025, 9:00 AM
+    end: new Date(2025, 8, 5, 9, 45)
+  },
+
+  // October 2025
+  {
+    title: 'Biology',
+    allDay: false,
+    start: new Date(2025, 9, 4, 10, 0),  // Oct 4, 2025, 10:00 AM
+    end: new Date(2025, 9, 4, 10, 45)
+  },
+  {
+    title: 'Physics',
+    allDay: false,
+    start: new Date(2025, 9, 7, 11, 0),  // Oct 7, 2025, 11:00 AM
+    end: new Date(2025, 9, 7, 11, 45)
+  },
+
+  // November 2025
+  {
+    title: 'Chemistry',
+    allDay: false,
+    start: new Date(2025, 10, 2, 13, 0),  // Nov 2, 2025, 1:00 PM
+    end: new Date(2025, 10, 2, 13, 45)
+  },
+  {
+    title: 'History',
+    allDay: false,
+    start: new Date(2025, 10, 9, 14, 0),  // Nov 9, 2025, 2:00 PM
+    end: new Date(2025, 10, 9, 14, 45)
+  },
+
+  // December 2025
+  {
+    title: 'Math',
+    allDay: false,
+    start: new Date(2025, 11, 1, 8, 0),  // Dec 1, 2025, 8:00 AM
+    end: new Date(2025, 11, 1, 8, 45)
+  },
+  {
+    title: 'English',
+    allDay: false,
+    start: new Date(2025, 11, 5, 9, 0),  // Dec 5, 2025, 9:00 AM
+    end: new Date(2025, 11, 5, 9, 45)
   }
 ];
+
 

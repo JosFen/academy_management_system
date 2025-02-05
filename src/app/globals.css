@@ -30,7 +30,7 @@
   font-size: x-small;
 }
 
-.rbc-btn-group:first-child  {
+.rbc-btn-group:first-child {
   display: none !important;
 }
 
@@ -50,11 +50,11 @@
 .rbc-time-view {
   font-size: clamp(8px, 1vw, 12px);
 }
-.rbc-allday-cell{
+.rbc-allday-cell {
   display: none !important;
 }
 
-.rbc-events-container{
+.rbc-events-container {
   width: 100% !important;
 }
 .rbc-time-content {
@@ -62,11 +62,10 @@
 }
 
 .rbc-event-label {
-  font-size: clamp(6px, 0.7vw, 10px) !important;  
-  
+  font-size: clamp(6px, 0.7vw, 10px) !important;
 }
 .rbc-event-content {
-  font-size:clamp(7px, 1.1vw, 14px) !important;
+  font-size: clamp(7px, 1.1vw, 14px) !important;
   font-weight: bold !important;
 }
 .rbc-event {

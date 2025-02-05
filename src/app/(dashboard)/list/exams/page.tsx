@@ -2,7 +2,7 @@ import Image from 'next/image'
 import TableSearch from '@/components/TableSearch'
 import Pagination from '@/components/Pagination'
 import Table from '@/components/Table'
-import { role, lessonColHeaders, lessonsData } from '@/lib/data'
+import { role, examColHeaders, examsData } from '@/lib/data'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
@@ -12,9 +12,10 @@ type Lesson = {
   subject: string
   class: number
   teacher: string
+  date: string
 }
 
-const LessonListPage = () => {
+const ExamListPage = () => {
   const renderRow = (item: Lesson) => (
     <tr
       key={item.id}
@@ -27,6 +28,7 @@ const LessonListPage = () => {
       <td className="text-xs md:text-sm hidden md:table-cell">
         {item.teacher}
       </td>
+      <td className="text-xs md:text-sm">{item.date}</td>
       <td>
         <div className="flex items-center gap-2">
           <Link href={`/list/classes/${item.id}`}>
@@ -49,7 +51,7 @@ const LessonListPage = () => {
       {/* TOP Search */}
       <div className="flex justify-between items-center my-4">
         <h1 className="text-lg font-semibold hidden md:block w-full">
-          List of All Lessons
+          List of All Exams
         </h1>
         <div className="flex flex-col md:flex-row gap-4 items-center w-full md:w-auto">
           <TableSearch />
@@ -69,13 +71,13 @@ const LessonListPage = () => {
 
       {/* Teacher List */}
       <Table
-        colHeaders={lessonColHeaders}
+        colHeaders={examColHeaders}
         renderRow={renderRow}
-        data={lessonsData}
+        data={examsData}
       />
       {/* Pagination */}
       <Pagination />
     </div>
   )
 }
-export default LessonListPage
+export default ExamListPage

@@ -2,31 +2,29 @@ import Image from 'next/image'
 import TableSearch from '@/components/TableSearch'
 import Pagination from '@/components/Pagination'
 import Table from '@/components/Table'
-import { role, lessonColHeaders, lessonsData } from '@/lib/data'
+import { role, announcementColHeaders, announcementsData } from '@/lib/data'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
-type Lesson = {
+type Announcement= {
   id: number
-  subject: string
-  class: number
-  teacher: string
+  title: string
+  class: string 
+  date: string
 }
 
-const LessonListPage = () => {
-  const renderRow = (item: Lesson) => (
+const AnnouncementListPage = () => {
+  const renderRow = (item: Announcement) => (
     <tr
       key={item.id}
       className="border-b border-gray-100 even:bg-slate-50 text-sm hover:bg-blue-100"
     >
       <td className="flex items-center gap-4 p-3">
-        <h1 className="font-semibold text-xs md:text-sm">{item.subject}</h1>
+        <h1 className="font-semibold text-xs md:text-sm">{item.title}</h1>
       </td>
       <td className="text-xs md:text-sm">{item.class}</td>
-      <td className="text-xs md:text-sm hidden md:table-cell">
-        {item.teacher}
-      </td>
+      <td className="text-xs md:text-sm">{item.date}</td>
       <td>
         <div className="flex items-center gap-2">
           <Link href={`/list/classes/${item.id}`}>
@@ -49,7 +47,7 @@ const LessonListPage = () => {
       {/* TOP Search */}
       <div className="flex justify-between items-center my-4">
         <h1 className="text-lg font-semibold hidden md:block w-full">
-          List of All Lessons
+        Announcements
         </h1>
         <div className="flex flex-col md:flex-row gap-4 items-center w-full md:w-auto">
           <TableSearch />
@@ -69,13 +67,13 @@ const LessonListPage = () => {
 
       {/* Teacher List */}
       <Table
-        colHeaders={lessonColHeaders}
+        colHeaders={announcementColHeaders}
         renderRow={renderRow}
-        data={lessonsData}
+        data={announcementsData}
       />
       {/* Pagination */}
       <Pagination />
     </div>
   )
 }
-export default LessonListPage
+export default AnnouncementListPage

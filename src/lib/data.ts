@@ -6,39 +6,39 @@ export const role = 'admin'
 
 export const teacherColHeaders = [
   {
-    header: "Info",
-    key: "info",
+    header: 'Info',
+    key: 'info'
   },
   {
-    header: "Teacher ID",
-    key: "teacherId",
-    className: "hidden md:table-cell",
+    header: 'Teacher ID',
+    key: 'teacherId',
+    className: 'hidden md:table-cell'
   },
   {
-    header: "Subjects",
-    key: "subjects",
-    className: "hidden md:table-cell",
+    header: 'Subjects',
+    key: 'subjects',
+    className: 'hidden md:table-cell'
   },
   {
-    header: "Classes",
-    key: "classes",
-    className: "hidden md:table-cell",
+    header: 'Classes',
+    key: 'classes',
+    className: 'hidden md:table-cell'
   },
   {
-    header: "Phone",
-    key: "phone",
-    className: "hidden xl:table-cell",
+    header: 'Phone',
+    key: 'phone',
+    className: 'hidden xl:table-cell'
   },
   {
-    header: "Address",
-    key: "address",
-    className: "hidden xl:table-cell",
+    header: 'Address',
+    key: 'address',
+    className: 'hidden xl:table-cell'
   },
   {
-    header: "Actions",
-    key: "action",
-  },
-];
+    header: 'Actions',
+    key: 'action'
+  }
+]
 
 export const teachersData = [
   {
@@ -46,7 +46,8 @@ export const teachersData = [
     teacherId: '57293820',
     name: 'Sophia Johnson',
     email: 'sophia.johnson@example.com',
-    photo: 'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=600',
+    photo:
+      'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=600',
     phone: '9053215678',
     subjects: ['Math', 'Geometry'],
     classes: ['1B', '2A', '3C'],
@@ -57,7 +58,8 @@ export const teachersData = [
     teacherId: '48120435',
     name: 'Lucas Smith',
     email: 'lucas.smith@example.com',
-    photo: 'https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg?auto=compress&cs=tinysrgb&w=600',
+    photo:
+      'https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg?auto=compress&cs=tinysrgb&w=600',
     phone: '4168765432',
     subjects: ['Physics', 'Chemistry'],
     classes: ['5A', '4B', '3C'],
@@ -68,7 +70,8 @@ export const teachersData = [
     teacherId: '98234567',
     name: 'Emily Roberts',
     email: 'emily.roberts@example.com',
-    photo: 'https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    photo:
+      'https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1200',
     phone: '5142098765',
     subjects: ['Biology'],
     classes: ['5A', '4B', '3C'],
@@ -79,7 +82,8 @@ export const teachersData = [
     teacherId: '21890467',
     name: 'William Davis',
     email: 'william.davis@example.com',
-    photo: 'https://images.pexels.com/photos/1741205/pexels-photo-1741205.jpeg?auto=compress&cs=tinysrgb&w=600',
+    photo:
+      'https://images.pexels.com/photos/1741205/pexels-photo-1741205.jpeg?auto=compress&cs=tinysrgb&w=600',
     phone: '6043398765',
     subjects: ['History'],
     classes: ['5A', '4B', '3C'],
@@ -90,7 +94,8 @@ export const teachersData = [
     teacherId: '90356782',
     name: 'Isabella Martinez',
     email: 'isabella.martinez@example.com',
-    photo: 'https://images.pexels.com/photos/2113567/pexels-photo-2113567.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    photo:
+      'https://images.pexels.com/photos/2113567/pexels-photo-2113567.jpeg?auto=compress&cs=tinysrgb&w=1200',
     phone: '7782345678',
     subjects: ['Music', 'History'],
     classes: ['5A', '4B', '3C'],
@@ -101,7 +106,8 @@ export const teachersData = [
     teacherId: '82340567',
     name: 'Oliver Wilson',
     email: 'oliver.wilson@example.com',
-    photo: 'https://images.pexels.com/photos/208984/pexels-photo-208984.jpeg?auto=compress&cs=tinysrgb&w=600',
+    photo:
+      'https://images.pexels.com/photos/208984/pexels-photo-208984.jpeg?auto=compress&cs=tinysrgb&w=600',
     phone: '6133456789',
     subjects: ['Physics'],
     classes: ['5A', '4B', '3C'],
@@ -112,7 +118,8 @@ export const teachersData = [
     teacherId: '34761829',
     name: 'Charlotte Taylor',
     email: 'charlotte.taylor@example.com',
-    photo: 'https://images.pexels.com/photos/3238764/pexels-photo-3238764.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    photo:
+      'https://images.pexels.com/photos/3238764/pexels-photo-3238764.jpeg?auto=compress&cs=tinysrgb&w=1200',
     phone: '4165678901',
     subjects: ['English', 'Spanish'],
     classes: ['5A', '4B', '3C'],
@@ -123,7 +130,8 @@ export const teachersData = [
     teacherId: '68945231',
     name: 'Jack Thompson',
     email: 'jack.thompson@example.com',
-    photo: 'https://images.pexels.com/photos/4639076/pexels-photo-4639076.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    photo:
+      'https://images.pexels.com/photos/4639076/pexels-photo-4639076.jpeg?auto=compress&cs=tinysrgb&w=1200',
     phone: '9051234567',
     subjects: ['Math', 'Geometry'],
     classes: ['5A', '4B', '3C'],
@@ -134,7 +142,8 @@ export const teachersData = [
     teacherId: '38214957',
     name: 'Ava Lee',
     email: 'ava.lee@example.com',
-    photo: 'https://images.pexels.com/photos/1184176/pexels-photo-1184176.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    photo:
+      'https://images.pexels.com/photos/1184176/pexels-photo-1184176.jpeg?auto=compress&cs=tinysrgb&w=1200',
     phone: '6046574321',
     subjects: ['Literature', 'English'],
     classes: ['5A', '4B', '3C'],
@@ -145,50 +154,50 @@ export const teachersData = [
     teacherId: '56092371',
     name: 'Liam Harris',
     email: 'liam.harris@example.com',
-    photo: 'https://images.pexels.com/photos/4845316/pexels-photo-4845316.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    photo:
+      'https://images.pexels.com/photos/4845316/pexels-photo-4845316.jpeg?auto=compress&cs=tinysrgb&w=1200',
     phone: '4166784321',
     subjects: ['Biology'],
     classes: ['5A', '4B', '3C'],
     address: '75 Dundas St, Toronto, ON, CANADA'
   }
-];
-
+]
 
 export const studentColHeaders = [
   {
-    header: "Info",
-    key: "info",
+    header: 'Info',
+    key: 'info'
   },
   {
-    header: "Student ID",
-    key: "studentId",
-    className: "hidden md:table-cell",
+    header: 'Student ID',
+    key: 'studentId',
+    className: 'hidden md:table-cell'
   },
   {
-    header: "Grade",
-    key: "grade",
-    className: "hidden md:table-cell",
+    header: 'Grade',
+    key: 'grade',
+    className: 'hidden md:table-cell'
   },
   {
-    header: "Class",
-    key: "class",
-    className: "hidden md:table-cell",
+    header: 'Class',
+    key: 'class',
+    className: 'hidden md:table-cell'
   },
   {
-    header: "Phone",
-    key: "phone",
-    className: "hidden xl:table-cell",
+    header: 'Phone',
+    key: 'phone',
+    className: 'hidden xl:table-cell'
   },
   {
-    header: "Address",
-    key: "address",
-    className: "hidden xl:table-cell",
+    header: 'Address',
+    key: 'address',
+    className: 'hidden xl:table-cell'
   },
   {
-    header: "Actions",
-    key: "action",
-  },
-];
+    header: 'Actions',
+    key: 'action'
+  }
+]
 
 export const studentsData = [
   {
@@ -311,33 +320,33 @@ export const studentsData = [
     class: '5A',
     address: '909 Maple Rd, Montreal, CANADA'
   }
-];
+]
 
 export const parentColHeaders = [
   {
-    header: "Info",
-    key: "info",
+    header: 'Info',
+    key: 'info'
   },
   {
-    header: "Student Names",
-    key: "students",
-    className: "hidden md:table-cell",
+    header: 'Student Names',
+    key: 'students',
+    className: 'hidden md:table-cell'
   },
   {
-    header: "Phone",
-    key: "phone",
-    className: "hidden xl:table-cell",
+    header: 'Phone',
+    key: 'phone',
+    className: 'hidden xl:table-cell'
   },
   {
-    header: "Address",
-    key: "address",
-    className: "hidden xl:table-cell",
+    header: 'Address',
+    key: 'address',
+    className: 'hidden xl:table-cell'
   },
   {
-    header: "Actions",
-    key: "action",
-  },
-];
+    header: 'Actions',
+    key: 'action'
+  }
+]
 
 export const parentsData = [
   {
@@ -424,20 +433,19 @@ export const parentsData = [
 
 export const subjectColHeaders = [
   {
-    header: "Info",
-    key: "info",
+    header: 'Subject',
+    key: 'subject'
   },
   {
-    header: "Teacher Names",
-    key: "teachers",
+    header: 'Teacher Names',
+    key: 'teachers'
     // className: "hidden md:table-cell",
   },
   {
-    header: "Actions",
-    key: "action",
-  },
-];
-
+    header: 'Actions',
+    key: 'action'
+  }
+]
 
 export const subjectsData = [
   {
@@ -490,33 +498,33 @@ export const subjectsData = [
     name: 'Literature',
     teachers: ['Effie Lynch', 'Brett Flowers']
   }
-];
+]
 
 export const classColHeaders = [
   {
-    header: "Class Name",
-    key: "name",
+    header: 'Class Name',
+    key: 'name'
   },
   {
-    header: "Capacity",
-    key: "capacity",
+    header: 'Capacity',
+    key: 'capacity'
     // className: "hidden md:table-cell",
   },
   {
-    header: "Grade",
-    key: "grade",
+    header: 'Grade',
+    key: 'grade'
     // className: "hidden md:table-cell",
   },
   {
-    header: "Supervisor",
-    key: "supervisor",
-    className: "hidden md:table-cell",
+    header: 'Supervisor',
+    key: 'supervisor',
+    className: 'hidden md:table-cell'
   },
   {
-    header: "Actions",
-    key: "action",
-  },
-];
+    header: 'Actions',
+    key: 'action'
+  }
+]
 
 export const classesData = [
   {
@@ -589,32 +597,27 @@ export const classesData = [
     grade: 6,
     supervisor: 'Ophelia Marsh'
   }
-];
+]
 
 export const lessonColHeaders = [
   {
-    header: "Class Name",
-    key: "name",
+    header: 'Lesson Name',
+    key: 'subject'
   },
   {
-    header: "Capacity",
-    key: "capacity",
+    header: 'Class',
+    key: 'class'
     // className: "hidden md:table-cell",
   },
   {
-    header: "Grade",
-    key: "grade",
-    // className: "hidden md:table-cell",
+    header: 'Teacher',
+    key: 'teacher',
+    className: 'hidden md:table-cell'
   },
   {
-    header: "Supervisor",
-    key: "supervisor",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Actions",
-    key: "action",
-  },
+    header: 'Actions',
+    key: 'action'
+  }
 ];
 
 export const lessonsData = [
@@ -678,7 +681,32 @@ export const lessonsData = [
     class: '4B',
     teacher: 'Julia Pittman'
   }
-]
+];
+
+export const examColHeaders = [
+  {
+    header: 'Subject',
+    key: 'subject'
+  },
+  {
+    header: 'Class',
+    key: 'class'
+    // className: "hidden md:table-cell",
+  },
+  {
+    header: 'Teacher',
+    key: 'teacher',
+    className: 'hidden md:table-cell'
+  }, 
+  {
+    header: 'Date',
+    key: 'date',
+  },
+  {
+    header: 'Actions',
+    key: 'action'
+  }
+];
 
 export const examsData = [
   {
@@ -753,6 +781,31 @@ export const examsData = [
   }
 ]
 
+export const assignmentColHeaders = [
+  {
+    header: 'Subject',
+    key: 'subject'
+  },
+  {
+    header: 'Class',
+    key: 'class'
+    // className: "hidden md:table-cell",
+  },
+  {
+    header: 'Teacher',
+    key: 'teacher',
+    className: 'hidden md:table-cell'
+  }, 
+  {
+    header: 'Due Date',
+    key: 'dueDate',
+  },
+  {
+    header: 'Actions',
+    key: 'action'
+  }
+];
+
 export const assignmentsData = [
   {
     id: 1,
@@ -825,6 +878,40 @@ export const assignmentsData = [
     dueDate: '2025-01-01'
   }
 ]
+export const resultColHeaders = [
+  {
+    header: 'Subject',
+    key: 'subject'
+  },
+  {
+    header: 'Student',
+    key: 'student'
+    // className: "hidden md:table-cell",
+  },
+  {
+    header: 'Score',
+    key: 'score'
+    // className: "hidden md:table-cell",
+  },
+  {
+    header: 'Teacher',
+    key: 'teacher',
+    className: 'hidden md:table-cell'
+  }, 
+  {
+    header: 'Class',
+    key: 'class'
+    // className: "hidden md:table-cell",
+  },
+  {
+    header: 'Date',
+    key: 'date',
+  },
+  {
+    header: 'Actions',
+    key: 'action'
+  }
+];
 
 export const resultsData = [
   {
@@ -928,6 +1015,35 @@ export const resultsData = [
     score: 90
   }
 ]
+export const eventColHeaders = [
+  {
+    header: 'Title',
+    key: 'title'
+  },
+  {
+    header: 'Class',
+    key: 'class'
+    // className: "hidden md:table-cell",
+  },
+  {
+    header: 'Date',
+    key: 'date',
+  },
+  {
+    header: 'Start Time',
+    key: 'startTime'
+    // className: "hidden md:table-cell",
+  },
+  {
+    header: 'End Time',
+    key: 'endTime'
+    // className: "hidden md:table-cell",
+  },
+  {
+    header: 'Actions',
+    key: 'action'
+  }
+];
 
 export const eventsData = [
   {
@@ -1011,69 +1127,90 @@ export const eventsData = [
     endTime: '11:00'
   }
 ]
+export const announcementColHeaders = [
+  {
+    header: 'Title',
+    key: 'title'
+  },
+  {
+    header: 'Class',
+    key: 'class'
+    // className: "hidden md:table-cell",
+  },
+  {
+    header: 'Date',
+    key: 'date',
+  },
+  {
+    header: 'Actions',
+    key: 'action'
+  }
+];
+
 
 export const announcementsData = [
   {
     id: 1,
-    title: 'About 4A Math Test',
-    class: '4A',
-    date: '2025-01-01'
+    title: 'Upcoming English Test for 1B',
+    class: '1B',
+    date: '2025-02-15'
   },
   {
     id: 2,
-    title: 'About 3A Math Test',
+    title: 'Important 3A Math Test Reminder',
     class: '3A',
-    date: '2025-01-01'
+    date: '2025-03-12'
   },
   {
     id: 3,
-    title: 'About 3B Math Test',
+    title: '3B: Algebra & Geometry Test Scheduled',
     class: '3B',
-    date: '2025-01-01'
+    date: '2025-04-21'
   },
   {
     id: 4,
-    title: 'About 6A Math Test',
+    title: '6A: Advanced Math Test on Calculus',
     class: '6A',
-    date: '2025-01-01'
+    date: '2025-05-01'
   },
   {
     id: 5,
-    title: 'About 8C Math Test',
+    title: 'Math Test on Trigonometry for 8C',
     class: '8C',
-    date: '2025-01-01'
+    date: '2025-06-09'
   },
   {
     id: 6,
-    title: 'About 2A Math Test',
+    title: '2A: Upcoming Math Test on Fractions',
     class: '2A',
-    date: '2025-01-01'
+    date: '2025-07-15'
   },
   {
     id: 7,
-    title: 'About 4C Math Test',
+    title: 'Reminder: 4C Geometry Test',
     class: '4C',
-    date: '2025-01-01'
+    date: '2025-08-02'
   },
   {
     id: 8,
-    title: 'About 4B Math Test',
+    title: '4B: Calculus Test on Limits and Derivatives',
     class: '4B',
-    date: '2025-01-01'
+    date: '2025-09-18'
   },
   {
     id: 9,
-    title: 'About 3C Math Test',
+    title: '3C: Final Math Exam',
     class: '3C',
-    date: '2025-01-01'
+    date: '2025-10-03'
   },
   {
     id: 10,
-    title: 'About 1C Math Test',
+    title: '1C Math Test: Addition and Subtraction',
     class: '1C',
-    date: '2025-01-01'
+    date: '2025-11-11'
   }
-]
+];
+
 
 // YOU SHOULD CHANGE THE DATES OF THE EVENTS TO THE CURRENT DATE TO SEE THE EVENTS ON THE CALENDAR
 export const calendarEvents = [

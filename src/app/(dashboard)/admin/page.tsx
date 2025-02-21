@@ -1,4 +1,4 @@
-import Announcemens from '@/components/Announcemens'
+import Announcemens from '@/components/Announcements'
 import AttendanceChart from '@/components/AttendanceChart'
 import BudgetChart from '@/components/BudgetExpenseChart'
 import CoursesRadarChart from '@/components/CoursesRadar'

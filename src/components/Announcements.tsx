@@ -1,7 +1,7 @@
 import announceData from '@/lib/announceData'
 import Image from 'next/image'
 
-const Announcemens = () => {
+const Announcements = () => {
   return (
     <div className="bg-white p-3 rounded-xl">
       <div className="flex items-center justify-between">
@@ -40,4 +40,4 @@ const Announcemens = () => {
   )
 }
 
-export default Announcemens
+export default Announcements

@@ -6,8 +6,10 @@ import { role, eventColHeaders, eventsData } from '@/lib/data'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import ListManageButtons from '@/components/ListManageButtons'
+import FormModal from '@/components/FormModal'
 
-type Event= {
+type Event = {
   id: number
   title: string
   class: string
@@ -27,9 +29,7 @@ const ResultListPage = () => {
       </td>
       <td className="text-xs md:text-sm">{item.class}</td>
       <td className="text-xs md:text-sm">{item.date}</td>
-      <td className="text-xs md:text-sm">
-        {item.startTime}
-      </td>
+      <td className="text-xs md:text-sm">{item.startTime}</td>
       <td className="text-xs md:text-sm">{item.endTime}</td>
       <td>
         <div className="flex items-center gap-2">
@@ -39,9 +39,11 @@ const ResultListPage = () => {
             </button>
           </Link>
           {role === 'admin' && (
-            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-red-400 text-white hover:bg-red-600 focus:outline-none">
-              <FontAwesomeIcon icon={faTrashAlt} className="w-4 h-4" />
-            </button>
+            <>
+            <FormModal table="subject" type="update"/>
+            <FormModal table="subject" type="create"/>
+            <FormModal table="subject" type="delete" id={item.id} />
+            </>
           )}
         </div>
       </td>
@@ -52,21 +54,11 @@ const ResultListPage = () => {
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
       {/* TOP Search */}
       <div className="flex justify-between items-center my-4">
-        <h1 className="text-lg font-semibold hidden md:block w-full">
-          Events
-        </h1>
+        <h1 className="text-lg font-semibold hidden md:block w-full">Events</h1>
         <div className="flex flex-col md:flex-row gap-4 items-center w-full md:w-auto">
           <TableSearch />
           <div className="flex items-center gap-4 self-end">
-            <button className="w-8 h-8 flex items-center justify-center bg-yellow-100 rounded-full">
-              <Image src="/filter.png" width={15} height={15} alt="filter" />
-            </button>
-            <button className="w-8 h-8 flex items-center justify-center bg-yellow-100 rounded-full">
-              <Image src="/sort.png" width={15} height={15} alt="sort" />
-            </button>
-            <button className="w-8 h-8 flex items-center justify-center bg-yellow-100 rounded-full">
-              <Image src="/plus.png" width={15} height={15} alt="plus" />
-            </button>
+            <ListManageButtons />
           </div>
         </div>
       </div>

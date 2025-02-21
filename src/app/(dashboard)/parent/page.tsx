@@ -1,4 +1,4 @@
-import Announcemens from '@/components/Announcemens'
+import Announcemens from '@/components/Announcements'
 import EventCalendar from '@/components/EventCalendar'
 import ScheduleCalendar from '@/components/ScheduleCalendar'
 

@@ -618,7 +618,7 @@ export const lessonColHeaders = [
     header: 'Actions',
     key: 'action'
   }
-];
+]
 
 export const lessonsData = [
   {
@@ -681,7 +681,7 @@ export const lessonsData = [
     class: '4B',
     teacher: 'Julia Pittman'
   }
-];
+]
 
 export const examColHeaders = [
   {
@@ -697,16 +697,16 @@ export const examColHeaders = [
     header: 'Teacher',
     key: 'teacher',
     className: 'hidden md:table-cell'
-  }, 
+  },
   {
     header: 'Date',
-    key: 'date',
+    key: 'date'
   },
   {
     header: 'Actions',
     key: 'action'
   }
-];
+]
 
 export const examsData = [
   {
@@ -795,16 +795,16 @@ export const assignmentColHeaders = [
     header: 'Teacher',
     key: 'teacher',
     className: 'hidden md:table-cell'
-  }, 
+  },
   {
     header: 'Due Date',
-    key: 'dueDate',
+    key: 'dueDate'
   },
   {
     header: 'Actions',
     key: 'action'
   }
-];
+]
 
 export const assignmentsData = [
   {
@@ -897,7 +897,7 @@ export const resultColHeaders = [
     header: 'Teacher',
     key: 'teacher',
     className: 'hidden md:table-cell'
-  }, 
+  },
   {
     header: 'Class',
     key: 'class'
@@ -905,13 +905,13 @@ export const resultColHeaders = [
   },
   {
     header: 'Date',
-    key: 'date',
+    key: 'date'
   },
   {
     header: 'Actions',
     key: 'action'
   }
-];
+]
 
 export const resultsData = [
   {
@@ -1027,7 +1027,7 @@ export const eventColHeaders = [
   },
   {
     header: 'Date',
-    key: 'date',
+    key: 'date'
   },
   {
     header: 'Start Time',
@@ -1043,7 +1043,7 @@ export const eventColHeaders = [
     header: 'Actions',
     key: 'action'
   }
-];
+]
 
 export const eventsData = [
   {
@@ -1139,14 +1139,13 @@ export const announcementColHeaders = [
   },
   {
     header: 'Date',
-    key: 'date',
+    key: 'date'
   },
   {
     header: 'Actions',
     key: 'action'
   }
-];
-
+]
 
 export const announcementsData = [
   {
@@ -1209,8 +1208,7 @@ export const announcementsData = [
     class: '1C',
     date: '2025-11-11'
   }
-];
-
+]
 
 // YOU SHOULD CHANGE THE DATES OF THE EVENTS TO THE CURRENT DATE TO SEE THE EVENTS ON THE CALENDAR
 export const calendarEvents = [

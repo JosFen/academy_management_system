@@ -38,9 +38,9 @@ const LessonListPage = () => {
           </Link>
           {role === 'admin' && (
             <>
-            <FormModal table="subject" type="update"/>
-            <FormModal table="subject" type="create"/>
-            <FormModal table="subject" type="delete" id={item.id} />
+              <FormModal table="subject" type="update" />
+              {/* <FormModal table="subject" type="create" /> */}
+              <FormModal table="subject" type="delete" id={item.id} />
             </>
           )}
         </div>

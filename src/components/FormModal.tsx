@@ -1,29 +1,35 @@
 'use client'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye, faTrashAlt, faEdit, faPlus} from '@fortawesome/free-solid-svg-icons'
-// import dynamic from "next/dynamic";
+import {
+  faEye,
+  faTrashAlt,
+  faEdit,
+  faPlus
+} from '@fortawesome/free-solid-svg-icons'
+import dynamic from "next/dynamic";
 import Image from 'next/image'
 import { useState } from 'react'
+// import TeacherForm from './forms/TeacherForm'
 
 // USE LAZY LOADING
 
 // import TeacherForm from "./forms/TeacherForm";
 // import StudentForm from "./forms/StudentForm";
 
-// const TeacherForm = dynamic(() => import("./forms/TeacherForm"), {
-//   loading: () => <h1>Loading...</h1>,
-// });
-// const StudentForm = dynamic(() => import("./forms/StudentForm"), {
-//   loading: () => <h1>Loading...</h1>,
-// });
+const TeacherForm = dynamic(() => import("./forms/TeacherForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
+const StudentForm = dynamic(() => import("./forms/StudentForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
 
-// const forms: {
-//   [key: string]: (type: "create" | "update", data?: any) => JSX.Element;
-// } = {
-//   teacher: (type, data) => <TeacherForm type={type} data={data} />,
-//   student: (type, data) => <StudentForm type={type} data={data} />
-// };
+const forms: {
+  [key: string]: (type: "create" | "update", data?: any) => JSX.Element;
+} = {
+  teacher: (type, data) => <TeacherForm type={type} data={data} />,
+  student: (type, data) => <StudentForm type={type} data={data} />
+};
 
 const FormModal = ({
   table,
@@ -48,13 +54,16 @@ const FormModal = ({
   data?: any
   id?: number
 }) => {
-  const icon = type === 'delete' ? faTrashAlt: type === 'update' ? faEdit : faPlus;
+  const icon =
+    type === 'delete' ? faTrashAlt : type === 'update' ? faEdit : faPlus;
+  // TAILWIND DYNAMIC CLASS:
+  // https://tailwindcss.com/docs/detecting-classes-in-source-files#using-regular-expressions
   const bgColor =
     type === 'create'
-      ? 'bg-yellow'
+      ? 'bg-yellow-400 hover:bg-yellow-600'
       : type === 'update'
-        ? 'bg-green'
-        : 'bg-red';
+        ? 'bg-green-400 hover:bg-green-600'
+        : 'bg-red-400 hover:bg-red-600'
 
   const [open, setOpen] = useState(false)
 
@@ -69,8 +78,7 @@ const FormModal = ({
         </button>
       </form>
     ) : type === 'create' || type === 'update' ? (
-      //   forms[table](type, data)
-      'Create or Update Form'
+        forms[table](type, data)
     ) : (
       'Form not found!'
     )
@@ -84,12 +92,15 @@ const FormModal = ({
       >
         <Image src={`/${type}.png`} alt="" width={16} height={16} />
       </button> */}
-      <button onClick={()=>setOpen(true)} className={`w-7 h-7 flex items-center justify-center rounded-full text-white ${bgColor}-400 hover:${bgColor}-600 focus:outline-none `}>
+      <button
+        onClick={() => setOpen(true)}
+        className={`w-7 h-7 flex items-center justify-center rounded-full text-white ${bgColor} focus:outline-none `}
+      >
         <FontAwesomeIcon icon={icon} className="w-4 h-4" />
       </button>
       {open && (
         <div className="w-screen h-screen absolute left-0 top-0 bg-black bg-opacity-60 z-50 flex items-center justify-center">
-          <div className="bg-white p-4 rounded-md relative w-[90%] md:w-[70%] lg:w-[60%] xl:w-[50%] 2xl:w-[40%]">
+          <div className="bg-white p-4 rounded-md max-h-[90vh] relative overflow-y-auto  w-[90%] md:w-[70%] lg:w-[60%] xl:w-[50%] 2xl:w-[40%]">
             <Form />
             <div
               className="absolute top-4 right-4 cursor-pointer"

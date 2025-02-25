@@ -30,11 +30,13 @@ const SingleTeacherPage = () => {
                 <h1 className="text-xl font-semibold">
                   {teachersData[0].name}
                 </h1>
-                {role === "admin" && <FormModal
-                  table="teacher"
-                  type="update"
-                  data={teachersData[0]}
-                />}
+                {role === 'admin' && (
+                  <FormModal
+                    table="teacher"
+                    type="update"
+                    data={teachersData[0]}
+                  />
+                )}
               </div>
               <p className="text-sm text-gray-500">
                 Loves to teach and share knowledge with students. Always

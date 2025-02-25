@@ -7,7 +7,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import FormModal from '@/components/FormModal'
 
-
 const SingleStudentPage = () => {
   return (
     <div className="flex-1 p-4 flex flex-col gap-4 xl:flex-row">
@@ -31,11 +30,13 @@ const SingleStudentPage = () => {
                 <h1 className="text-xl font-semibold">
                   {studentsData[0].name}
                 </h1>
-                {role === "admin" && <FormModal
-                  table="student"
-                  type="update"
-                  data={studentsData[0]}
-                />}
+                {role === 'admin' && (
+                  <FormModal
+                    table="student"
+                    type="update"
+                    data={studentsData[0]}
+                  />
+                )}
               </div>
               <p className="text-sm text-gray-500">
                 Loves to teach and share knowledge with students. Always

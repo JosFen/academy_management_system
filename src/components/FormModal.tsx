@@ -7,7 +7,7 @@ import {
   faEdit,
   faPlus
 } from '@fortawesome/free-solid-svg-icons'
-import dynamic from "next/dynamic";
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { useState } from 'react'
 // import TeacherForm from './forms/TeacherForm'
@@ -17,19 +17,19 @@ import { useState } from 'react'
 // import TeacherForm from "./forms/TeacherForm";
 // import StudentForm from "./forms/StudentForm";
 
-const TeacherForm = dynamic(() => import("./forms/TeacherForm"), {
-  loading: () => <h1>Loading...</h1>,
-});
-const StudentForm = dynamic(() => import("./forms/StudentForm"), {
-  loading: () => <h1>Loading...</h1>,
-});
+const TeacherForm = dynamic(() => import('./forms/TeacherForm'), {
+  loading: () => <h1>Loading...</h1>
+})
+const StudentForm = dynamic(() => import('./forms/StudentForm'), {
+  loading: () => <h1>Loading...</h1>
+})
 
 const forms: {
-  [key: string]: (type: "create" | "update", data?: any) => JSX.Element;
+  [key: string]: (type: 'create' | 'update', data?: any) => JSX.Element
 } = {
   teacher: (type, data) => <TeacherForm type={type} data={data} />,
   student: (type, data) => <StudentForm type={type} data={data} />
-};
+}
 
 const FormModal = ({
   table,
@@ -55,7 +55,7 @@ const FormModal = ({
   id?: number
 }) => {
   const icon =
-    type === 'delete' ? faTrashAlt : type === 'update' ? faEdit : faPlus;
+    type === 'delete' ? faTrashAlt : type === 'update' ? faEdit : faPlus
   // TAILWIND DYNAMIC CLASS:
   // https://tailwindcss.com/docs/detecting-classes-in-source-files#using-regular-expressions
   const bgColor =
@@ -78,7 +78,7 @@ const FormModal = ({
         </button>
       </form>
     ) : type === 'create' || type === 'update' ? (
-        forms[table](type, data)
+      forms[table](type, data)
     ) : (
       'Form not found!'
     )

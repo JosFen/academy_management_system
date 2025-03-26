@@ -10,7 +10,6 @@ import {
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { useState } from 'react'
-// import TeacherForm from './forms/TeacherForm'
 
 // USE LAZY LOADING
 

@@ -1,5 +1,5 @@
 {
-  "name": "kindergarden-management-system",
+  "name": "hedgie-academy-management-system",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -17,6 +17,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@hookform/resolvers": "^4.1.0",
+    "@prisma/client": "^6.4.1",
     "eslint": "^8.57.1",
     "glob": "^11.0.1",
     "moment": "^2.30.1",

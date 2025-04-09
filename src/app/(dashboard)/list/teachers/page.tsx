@@ -9,28 +9,37 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import ListManageButtons from '@/components/ListManageButtons'
 import FormModal from '@/components/FormModal'
+import { Class, Subject, Teacher } from '@prisma/client'
+import { prisma } from '@/lib/prisma'
+import { ITEM_PER_PAGE } from '@/lib/settings'
 
-type Teacher = {
-  id: number
-  teacherId: string
-  name: string
-  email?: string
-  photo: string
-  phone: string
-  subjects: string[]
-  classes: string[]
-  address: string
-}
+type TeacherList = Teacher & { subjects: Subject[] } & { classes: Class[] };
 
-const TeacherListPage = () => {
-  const renderRow = (item: Teacher) => (
+const TeacherListPage = async ({
+  searchParams
+}: {
+  searchParams: { [key: string]: string | undefined }
+}) => {
+  const { page, ...queryParams } = searchParams;
+  const p = page ? parseInt(page as string) : 1;
+
+  const data = await prisma.teacher.findMany({
+    include: {
+      subjects: true,
+      classes: true
+    },
+    take: ITEM_PER_PAGE,
+    skip: (p - 1) * ITEM_PER_PAGE
+  });
+
+  const renderRow = (item: TeacherList) => (
     <tr
       key={item.id}
       className="border-b border-gray-100 even:bg-slate-50 text-sm hover:bg-blue-100"
     >
       <td className="flex items-center gap-4 p-3">
         <Image
-          src={item.photo}
+          src={item.img || '/noAvatar.png'}
           alt={item.name}
           width={40}
           height={40}
@@ -41,9 +50,13 @@ const TeacherListPage = () => {
           <p className="text-xs text-gray-500">{item?.email}</p>
         </div>
       </td>
-      <td className="hidden md:table-cell">{item.teacherId}</td>
-      <td className="hidden md:table-cell">{item.subjects.join(', ')}</td>
-      <td className="hidden md:table-cell">{item.classes.join(', ')}</td>
+      <td className="hidden md:table-cell">{item.id}</td>
+      <td className="hidden md:table-cell">
+        {item.subjects.map((s) => s.name).join(', ')}
+      </td>
+      <td className="hidden md:table-cell">
+        {item.classes.map((c) => c.name).join(', ')}
+      </td>
       <td className="hidden xl:table-cell">{item.phone}</td>
       <td className="hidden xl:table-cell">{item.address}</td>
       <td>
@@ -55,7 +68,7 @@ const TeacherListPage = () => {
           </Link>
           {role === 'admin' && (
             <>
-              <FormModal table="teacher" type="update" />
+              {/* <FormModal table="teacher" type="update" /> */}
               {/* <FormModal table="teacher" type="create" /> */}
               <FormModal table="teacher" type="delete" id={item.id} />
             </>
@@ -63,7 +76,7 @@ const TeacherListPage = () => {
         </div>
       </td>
     </tr>
-  )
+  );
 
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
@@ -79,14 +92,11 @@ const TeacherListPage = () => {
       </div>
 
       {/* Teacher List */}
-      <Table
-        colHeaders={teacherColHeaders}
-        renderRow={renderRow}
-        data={teachersData}
-      />
+      <Table colHeaders={teacherColHeaders} renderRow={renderRow} data={data} />
       {/* Pagination */}
       <Pagination />
     </div>
   )
-}
-export default TeacherListPage
+};
+
+export default TeacherListPage;

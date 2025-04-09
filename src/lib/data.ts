@@ -1,7 +1,7 @@
 // TEMPORARY DATA
 
 import { title } from 'process'
-
+import {  UserSex } from '@prisma/client'
 export const role = 'admin'
 
 export const teacherColHeaders = [
@@ -42,126 +42,167 @@ export const teacherColHeaders = [
 
 export const teachersData = [
   {
-    id: 1,
-    teacherId: '57293820',
-    name: 'Sophia Johnson',
+    id: '57293820',
+    username: 'sophia.johnson',
+    name: 'Sophia',
+    surname: 'Johnson',
     email: 'sophia.johnson@example.com',
-    photo:
-      'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=600',
     phone: '9053215678',
+    address: '56 Maple St, Toronto, ON, CANADA',
+    img: 'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=600',
+    bloodType: 'O+',
+    sex: UserSex.FEMALE,
+    createdAt: new Date(),
     subjects: ['Math', 'Geometry'],
     classes: ['1B', '2A', '3C'],
-    address: '56 Maple St, Toronto, ON, CANADA'
+    birthday: new Date('1985-06-15'),
   },
   {
-    id: 2,
-    teacherId: '48120435',
-    name: 'Lucas Smith',
+    id: '48120435',
+    username: 'lucas.smith',
+    name: 'Lucas',
+    surname: 'Smith',
     email: 'lucas.smith@example.com',
-    photo:
-      'https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg?auto=compress&cs=tinysrgb&w=600',
     phone: '4168765432',
+    address: '192 King St, Ottawa, ON, CANADA',
+    img: 'https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg?auto=compress&cs=tinysrgb&w=600',
+    bloodType: 'A+',
+    sex: UserSex.MALE, 
+    createdAt: new Date(),
     subjects: ['Physics', 'Chemistry'],
     classes: ['5A', '4B', '3C'],
-    address: '192 King St, Ottawa, ON, CANADA'
+    birthday: new Date('1987-11-25'),
   },
   {
-    id: 3,
-    teacherId: '98234567',
-    name: 'Emily Roberts',
+    id: '98234567',
+    username: 'emily.roberts',
+    name: 'Emily',
+    surname: 'Roberts',
     email: 'emily.roberts@example.com',
-    photo:
-      'https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1200',
     phone: '5142098765',
+    address: '88 Westmount Ave, Montreal, QC, CANADA',
+    img: 'https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    bloodType: 'B+',
+    sex: UserSex.FEMALE,
+    createdAt: new Date(),
     subjects: ['Biology'],
     classes: ['5A', '4B', '3C'],
-    address: '88 Westmount Ave, Montreal, QC, CANADA'
+    birthday: new Date('1990-02-12'),
   },
   {
-    id: 4,
-    teacherId: '21890467',
-    name: 'William Davis',
+    id: '21890467',
+    username: 'william.davis',
+    name: 'William',
+    surname: 'Davis',
     email: 'william.davis@example.com',
-    photo:
-      'https://images.pexels.com/photos/1741205/pexels-photo-1741205.jpeg?auto=compress&cs=tinysrgb&w=600',
     phone: '6043398765',
+    address: '23 Dunbar St, Vancouver, BC, CANADA',
+    img: 'https://images.pexels.com/photos/1741205/pexels-photo-1741205.jpeg?auto=compress&cs=tinysrgb&w=600',
+    bloodType: 'O-',
+    sex: UserSex.MALE,
+    createdAt: new Date(),
     subjects: ['History'],
     classes: ['5A', '4B', '3C'],
-    address: '23 Dunbar St, Vancouver, BC, CANADA'
+    birthday: new Date('1982-04-05'),
   },
   {
-    id: 5,
-    teacherId: '90356782',
-    name: 'Isabella Martinez',
+    id: '90356782',
+    username: 'isabella.martinez',
+    name: 'Isabella',
+    surname: 'Martinez',
     email: 'isabella.martinez@example.com',
-    photo:
-      'https://images.pexels.com/photos/2113567/pexels-photo-2113567.jpeg?auto=compress&cs=tinysrgb&w=1200',
     phone: '7782345678',
+    address: '65 Yonge St, Calgary, AB, CANADA',
+    img: 'https://images.pexels.com/photos/2113567/pexels-photo-2113567.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    bloodType: 'AB+',
+    sex: UserSex.FEMALE,
+    createdAt: new Date(),
     subjects: ['Music', 'History'],
     classes: ['5A', '4B', '3C'],
-    address: '65 Yonge St, Calgary, AB, CANADA'
+    birthday: new Date('1992-08-20'),
   },
   {
-    id: 6,
-    teacherId: '82340567',
-    name: 'Oliver Wilson',
+    id: '82340567',
+    username: 'oliver.wilson',
+    name: 'Oliver',
+    surname: 'Wilson',
     email: 'oliver.wilson@example.com',
-    photo:
-      'https://images.pexels.com/photos/208984/pexels-photo-208984.jpeg?auto=compress&cs=tinysrgb&w=600',
     phone: '6133456789',
+    address: '45 Laurier Ave, Quebec City, QC, CANADA',
+    img: 'https://images.pexels.com/photos/208984/pexels-photo-208984.jpeg?auto=compress&cs=tinysrgb&w=600',
+    bloodType: 'O+',
+    sex: UserSex.MALE,
+    createdAt: new Date(),
     subjects: ['Physics'],
     classes: ['5A', '4B', '3C'],
-    address: '45 Laurier Ave, Quebec City, QC, CANADA'
+    birthday: new Date('1988-12-30'),
   },
   {
-    id: 7,
-    teacherId: '34761829',
-    name: 'Charlotte Taylor',
+    id: '34761829',
+    username: 'charlotte.taylor',
+    name: 'Charlotte',
+    surname: 'Taylor',
     email: 'charlotte.taylor@example.com',
-    photo:
-      'https://images.pexels.com/photos/3238764/pexels-photo-3238764.jpeg?auto=compress&cs=tinysrgb&w=1200',
     phone: '4165678901',
+    address: '120 York St, Toronto, ON, CANADA',
+    img: 'https://images.pexels.com/photos/3238764/pexels-photo-3238764.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    bloodType: 'B-',
+    sex: UserSex.FEMALE,
+    createdAt: new Date(),
     subjects: ['English', 'Spanish'],
     classes: ['5A', '4B', '3C'],
-    address: '120 York St, Toronto, ON, CANADA'
+    birthday: new Date('1984-07-15'),
   },
   {
-    id: 8,
-    teacherId: '68945231',
-    name: 'Jack Thompson',
+    id: '68945231',
+    username: 'jack.thompson',
+    name: 'Jack',
+    surname: 'Thompson',
     email: 'jack.thompson@example.com',
-    photo:
-      'https://images.pexels.com/photos/4639076/pexels-photo-4639076.jpeg?auto=compress&cs=tinysrgb&w=1200',
     phone: '9051234567',
+    address: '300 Bay St, Hamilton, ON, CANADA',
+    img: 'https://images.pexels.com/photos/4639076/pexels-photo-4639076.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    bloodType: 'A-',
+    sex: UserSex.MALE,
+    createdAt: new Date(),
     subjects: ['Math', 'Geometry'],
     classes: ['5A', '4B', '3C'],
-    address: '300 Bay St, Hamilton, ON, CANADA'
+    birthday: new Date('1986-09-10'),
   },
   {
-    id: 9,
-    teacherId: '38214957',
-    name: 'Ava Lee',
+    id: '38214957',
+    username: 'ava.lee',
+    name: 'Ava',
+    surname: 'Lee',
     email: 'ava.lee@example.com',
-    photo:
-      'https://images.pexels.com/photos/1184176/pexels-photo-1184176.jpeg?auto=compress&cs=tinysrgb&w=1200',
     phone: '6046574321',
+    address: '47 Alberta St, Calgary, AB, CANADA',
+    img: 'https://images.pexels.com/photos/1184176/pexels-photo-1184176.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    bloodType: 'AB-',
+    sex: UserSex.FEMALE,
+    createdAt: new Date(),
     subjects: ['Literature', 'English'],
     classes: ['5A', '4B', '3C'],
-    address: '47 Alberta St, Calgary, AB, CANADA'
+    birthday: new Date('1993-11-18'),
   },
   {
-    id: 10,
-    teacherId: '56092371',
-    name: 'Liam Harris',
+    id: '56092371',
+    username: 'liam.harris',
+    name: 'Liam',
+    surname: 'Harris',
     email: 'liam.harris@example.com',
-    photo:
-      'https://images.pexels.com/photos/4845316/pexels-photo-4845316.jpeg?auto=compress&cs=tinysrgb&w=1200',
     phone: '4166784321',
+    address: '75 Dundas St, Toronto, ON, CANADA',
+    img: 'https://images.pexels.com/photos/4845316/pexels-photo-4845316.jpeg?auto=compress&cs=tinysrgb&w=1200',
+    bloodType: 'O+',
+    sex: UserSex.MALE,
+    createdAt: new Date(),
     subjects: ['Biology'],
     classes: ['5A', '4B', '3C'],
-    address: '75 Dundas St, Toronto, ON, CANADA'
-  }
-]
+    birthday: new Date('1989-03-22'),
+  },
+];
+
 
 export const studentColHeaders = [
   {

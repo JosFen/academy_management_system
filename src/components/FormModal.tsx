@@ -51,7 +51,7 @@ const FormModal = ({
     | 'announcement'
   type: 'create' | 'update' | 'delete'
   data?: any
-  id?: string
+  id?: number | string
 }) => {
   const icon =
     type === 'delete' ? faTrashAlt : type === 'update' ? faEdit : faPlus

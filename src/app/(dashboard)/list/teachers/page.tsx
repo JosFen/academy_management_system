@@ -15,6 +15,52 @@ import { ITEM_PER_PAGE } from '@/lib/settings'
 
 type TeacherList = Teacher & { subjects: Subject[] } & { classes: Class[] }
 
+const renderRow = (item: TeacherList) => (
+  <tr
+    key={item.id}
+    className="border-b border-gray-100 even:bg-slate-50 text-sm hover:bg-blue-100"
+  >
+    <td className="flex items-center gap-4 p-3">
+      <Image
+        src={item.img || '/noAvatar.png'}
+        alt={item.name}
+        width={40}
+        height={40}
+        className="w-10 h-10 rounded-full object-cover"
+      />
+      <div className="flex flex-col">
+        <h1 className="font-semibold">{item.name}</h1>
+        <p className="text-xs text-gray-500">{item?.email}</p>
+      </div>
+    </td>
+    <td className="hidden md:table-cell">{item.id}</td>
+    <td className="hidden md:table-cell">
+      {item.subjects.map((s) => s.name).join(', ')}
+    </td>
+    <td className="hidden md:table-cell">
+      {item.classes.map((c) => c.name).join(', ')}
+    </td>
+    <td className="hidden xl:table-cell">{item.phone}</td>
+    <td className="hidden xl:table-cell">{item.address}</td>
+    <td>
+      <div className="flex items-center gap-2">
+        <Link href={`/list/teachers/${item.id}`}>
+          <button className="w-7 h-7 flex items-center justify-center  rounded-full bg-blue-300 text-white hover:bg-blue-500 focus:outline-none">
+            <FontAwesomeIcon icon={faEye} className="w-4 h-4" />
+          </button>
+        </Link>
+        {role === 'admin' && (
+          <>
+            {/* <FormModal table="teacher" type="update" /> */}
+            {/* <FormModal table="teacher" type="create" /> */}
+            <FormModal table="teacher" type="delete" id={item.id} />
+          </>
+        )}
+      </div>
+    </td>
+  </tr>
+)
+
 const TeacherListPage = async ({
   searchParams
 }: {
@@ -62,52 +108,6 @@ const TeacherListPage = async ({
 
   // const count = await prisma.teacher.count();
   // console.log('count', count);
-
-  const renderRow = (item: TeacherList) => (
-    <tr
-      key={item.id}
-      className="border-b border-gray-100 even:bg-slate-50 text-sm hover:bg-blue-100"
-    >
-      <td className="flex items-center gap-4 p-3">
-        <Image
-          src={item.img || '/noAvatar.png'}
-          alt={item.name}
-          width={40}
-          height={40}
-          className="w-10 h-10 rounded-full object-cover"
-        />
-        <div className="flex flex-col">
-          <h1 className="font-semibold">{item.name}</h1>
-          <p className="text-xs text-gray-500">{item?.email}</p>
-        </div>
-      </td>
-      <td className="hidden md:table-cell">{item.id}</td>
-      <td className="hidden md:table-cell">
-        {item.subjects.map((s) => s.name).join(', ')}
-      </td>
-      <td className="hidden md:table-cell">
-        {item.classes.map((c) => c.name).join(', ')}
-      </td>
-      <td className="hidden xl:table-cell">{item.phone}</td>
-      <td className="hidden xl:table-cell">{item.address}</td>
-      <td>
-        <div className="flex items-center gap-2">
-          <Link href={`/list/teachers/${item.id}`}>
-            <button className="w-7 h-7 flex items-center justify-center  rounded-full bg-blue-300 text-white hover:bg-blue-500 focus:outline-none">
-              <FontAwesomeIcon icon={faEye} className="w-4 h-4" />
-            </button>
-          </Link>
-          {role === 'admin' && (
-            <>
-              {/* <FormModal table="teacher" type="update" /> */}
-              {/* <FormModal table="teacher" type="create" /> */}
-              <FormModal table="teacher" type="delete" id={item.id} />
-            </>
-          )}
-        </div>
-      </td>
-    </tr>
-  )
 
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">

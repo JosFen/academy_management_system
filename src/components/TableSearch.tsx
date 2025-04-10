@@ -26,7 +26,7 @@ const TableSearch = () => {
       <Image src="/search.png" width={15} height={15} alt="search" />
       <input
         type="text"
-        placeholder="Search teacher name..."
+        placeholder="Search name..."
         className="p-2 outline-none bg-transparent w-[200px]"
       />
     </form>

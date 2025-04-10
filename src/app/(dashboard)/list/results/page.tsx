@@ -87,7 +87,8 @@ const ResultListPage = async ({
           case 'search':
             query.OR = [
               { exam: { title: { contains: value, mode: 'insensitive' } } },
-              { student: { name: { contains: value, mode: 'insensitive' } } }
+              { student: { name: { contains: value, mode: 'insensitive' } } },
+              { assignment: { title: { contains: value, mode: 'insensitive' } } }
             ]
             break
           default:

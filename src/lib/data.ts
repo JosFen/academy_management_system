@@ -753,6 +753,10 @@ export const examColHeaders = [
     key: 'date'
   },
   {
+    header: 'Time',
+    key: 'time'
+  },
+  {
     header: 'Actions',
     key: 'action'
   }
@@ -930,8 +934,8 @@ export const assignmentsData = [
 ]
 export const resultColHeaders = [
   {
-    header: 'Subject',
-    key: 'subject'
+    header: 'Result',
+    key: 'result'
   },
   {
     header: 'Student',

@@ -12,7 +12,7 @@ import { Class, Prisma, Student } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { ITEM_PER_PAGE } from '@/lib/settings'
 
-type StudentList = Student & { class: Class };
+type StudentList = Student & { class: Class }
 
 const renderRow = (item: StudentList) => (
   <tr
@@ -64,36 +64,36 @@ const StudentListPage = async ({
   const { page, ...queryParams } = searchParams
   const p = page ? parseInt(page as string) : 1
 
-  const query: Prisma.StudentWhereInput = {};
+  const query: Prisma.StudentWhereInput = {}
 
   if (queryParams) {
     for (const [key, value] of Object.entries(queryParams)) {
       if (value !== undefined) {
         switch (key) {
-          case "teacherId": 
+          case 'teacherId':
             query.class = {
               lessons: {
                 some: {
-                  teacherId: value,
-                },
+                  teacherId: value
+                }
               }
             }
-            break;
-          case "search": // search for student name
-            query.name = { contains: value, mode: "insensitive" };
-            break;
+            break
+          case 'search': // search for student name
+            query.name = { contains: value, mode: 'insensitive' }
+            break
           default:
-            break;
+            break
         }
       }
     }
   }
-  
+
   const [data, count] = await prisma.$transaction([
     prisma.student.findMany({
       where: query,
       include: {
-        class: true,
+        class: true
       },
       take: ITEM_PER_PAGE,
       skip: (p - 1) * ITEM_PER_PAGE
@@ -115,11 +115,7 @@ const StudentListPage = async ({
       </div>
 
       {/* Student List */}
-      <Table
-        colHeaders={studentColHeaders}
-        renderRow={renderRow}
-        data={data}
-      />
+      <Table colHeaders={studentColHeaders} renderRow={renderRow} data={data} />
       {/* Pagination */}
       <Pagination page={p} count={count} />
     </div>

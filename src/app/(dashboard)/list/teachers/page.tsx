@@ -3,7 +3,7 @@ import TableSearch from '@/components/TableSearch'
 import Pagination from '@/components/Pagination'
 import Table from '@/components/Table'
 import { role, teacherColHeaders, teachersData } from '@/lib/data'
-import { it } from 'node:test'
+// import { it } from 'node:test'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
@@ -69,30 +69,32 @@ const TeacherListPage = async ({
   const { page, ...queryParams } = searchParams
   const p = page ? parseInt(page as string) : 1
 
-  const query: Prisma.TeacherWhereInput = {};
+  const query: Prisma.TeacherWhereInput = {}
 
   if (queryParams) {
     for (const [key, value] of Object.entries(queryParams)) {
       if (value !== undefined) {
         switch (key) {
-          case "classId":
-            const classId = parseInt(value);
-            if (!isNaN(classId)) { //Error handling for non-integer classId
-              query.lessons = {// return all teachers for the lessons of this class
-                some: { classId },
-              };
+          case 'classId':
+            const classId = parseInt(value)
+            if (!isNaN(classId)) {
+              //Error handling for non-integer classId
+              query.lessons = {
+                // return all teachers for the lessons of this class
+                some: { classId }
+              }
             }
-            break;
-          case "search": // search for teacher name
-            query.name = { contains: value, mode: "insensitive" };
-            break;
+            break
+          case 'search': // search for teacher name
+            query.name = { contains: value, mode: 'insensitive' }
+            break
           default:
-            break;
+            break
         }
       }
     }
   }
-  
+
   const [data, count] = await prisma.$transaction([
     prisma.teacher.findMany({
       where: query,

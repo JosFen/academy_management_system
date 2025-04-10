@@ -9,28 +9,59 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import ListManageButtons from '@/components/ListManageButtons'
 import FormModal from '@/components/FormModal'
-import { Class, Subject, Teacher } from '@prisma/client'
+import { Class, Prisma, Subject, Teacher } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { ITEM_PER_PAGE } from '@/lib/settings'
 
-type TeacherList = Teacher & { subjects: Subject[] } & { classes: Class[] };
+type TeacherList = Teacher & { subjects: Subject[] } & { classes: Class[] }
 
 const TeacherListPage = async ({
   searchParams
 }: {
   searchParams: { [key: string]: string | undefined }
 }) => {
-  const { page, ...queryParams } = searchParams;
-  const p = page ? parseInt(page as string) : 1;
+  const { page, ...queryParams } = searchParams
+  const p = page ? parseInt(page as string) : 1
 
-  const data = await prisma.teacher.findMany({
-    include: {
-      subjects: true,
-      classes: true
-    },
-    take: ITEM_PER_PAGE,
-    skip: (p - 1) * ITEM_PER_PAGE
-  });
+  const query: Prisma.TeacherWhereInput = {};
+
+  if (queryParams) {
+    for (const [key, value] of Object.entries(queryParams)) {
+      if (value !== undefined) {
+        switch (key) {
+          case "classId":
+            const classId = parseInt(value);
+            if (!isNaN(classId)) { //Error handling for non-integer classId
+              query.lessons = {// return all teachers for the lessons of this class
+                some: { classId },
+              };
+            }
+            break;
+          case "search": // search for teacher name
+            query.name = { contains: value, mode: "insensitive" };
+            break;
+          default:
+            break;
+        }
+      }
+    }
+  }
+  
+  const [data, count] = await prisma.$transaction([
+    prisma.teacher.findMany({
+      where: query,
+      include: {
+        subjects: true,
+        classes: true
+      },
+      take: ITEM_PER_PAGE,
+      skip: (p - 1) * ITEM_PER_PAGE
+    }),
+    prisma.teacher.count({ where: query })
+  ])
+
+  // const count = await prisma.teacher.count();
+  // console.log('count', count);
 
   const renderRow = (item: TeacherList) => (
     <tr
@@ -76,7 +107,7 @@ const TeacherListPage = async ({
         </div>
       </td>
     </tr>
-  );
+  )
 
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
@@ -94,9 +125,9 @@ const TeacherListPage = async ({
       {/* Teacher List */}
       <Table colHeaders={teacherColHeaders} renderRow={renderRow} data={data} />
       {/* Pagination */}
-      <Pagination />
+      <Pagination page={p} count={count} />
     </div>
   )
-};
+}
 
-export default TeacherListPage;
+export default TeacherListPage

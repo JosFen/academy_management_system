@@ -1,7 +1,7 @@
 // TEMPORARY DATA
 
 import { title } from 'process'
-import {  UserSex } from '@prisma/client'
+import { UserSex } from '@prisma/client'
 export const role = 'admin'
 
 export const teacherColHeaders = [
@@ -54,8 +54,9 @@ export const teachersData = [
     sex: UserSex.FEMALE,
     createdAt: new Date(),
     subjects: ['Math', 'Geometry'],
+    lessons: [], // Added empty lessons array
     classes: ['1B', '2A', '3C'],
-    birthday: new Date('1985-06-15'),
+    birthday: new Date('1985-06-15')
   },
   {
     id: '48120435',
@@ -67,11 +68,12 @@ export const teachersData = [
     address: '192 King St, Ottawa, ON, CANADA',
     img: 'https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg?auto=compress&cs=tinysrgb&w=600',
     bloodType: 'A+',
-    sex: UserSex.MALE, 
+    sex: UserSex.MALE,
     createdAt: new Date(),
     subjects: ['Physics', 'Chemistry'],
+    lessons: [], // Added empty lessons array
     classes: ['5A', '4B', '3C'],
-    birthday: new Date('1987-11-25'),
+    birthday: new Date('1987-11-25')
   },
   {
     id: '98234567',
@@ -86,8 +88,9 @@ export const teachersData = [
     sex: UserSex.FEMALE,
     createdAt: new Date(),
     subjects: ['Biology'],
+    lessons: [], // Added empty lessons array
     classes: ['5A', '4B', '3C'],
-    birthday: new Date('1990-02-12'),
+    birthday: new Date('1990-02-12')
   },
   {
     id: '21890467',
@@ -102,8 +105,9 @@ export const teachersData = [
     sex: UserSex.MALE,
     createdAt: new Date(),
     subjects: ['History'],
+    lessons: [], // Added empty lessons array
     classes: ['5A', '4B', '3C'],
-    birthday: new Date('1982-04-05'),
+    birthday: new Date('1982-04-05')
   },
   {
     id: '90356782',
@@ -118,8 +122,9 @@ export const teachersData = [
     sex: UserSex.FEMALE,
     createdAt: new Date(),
     subjects: ['Music', 'History'],
+    lessons: [], // Added empty lessons array
     classes: ['5A', '4B', '3C'],
-    birthday: new Date('1992-08-20'),
+    birthday: new Date('1992-08-20')
   },
   {
     id: '82340567',
@@ -134,8 +139,9 @@ export const teachersData = [
     sex: UserSex.MALE,
     createdAt: new Date(),
     subjects: ['Physics'],
+    lessons: [], // Added empty lessons array
     classes: ['5A', '4B', '3C'],
-    birthday: new Date('1988-12-30'),
+    birthday: new Date('1988-12-30')
   },
   {
     id: '34761829',
@@ -150,8 +156,9 @@ export const teachersData = [
     sex: UserSex.FEMALE,
     createdAt: new Date(),
     subjects: ['English', 'Spanish'],
+    lessons: [], // Added empty lessons array
     classes: ['5A', '4B', '3C'],
-    birthday: new Date('1984-07-15'),
+    birthday: new Date('1984-07-15')
   },
   {
     id: '68945231',
@@ -166,8 +173,9 @@ export const teachersData = [
     sex: UserSex.MALE,
     createdAt: new Date(),
     subjects: ['Math', 'Geometry'],
+    lessons: [], // Added empty lessons array
     classes: ['5A', '4B', '3C'],
-    birthday: new Date('1986-09-10'),
+    birthday: new Date('1986-09-10')
   },
   {
     id: '38214957',
@@ -182,8 +190,9 @@ export const teachersData = [
     sex: UserSex.FEMALE,
     createdAt: new Date(),
     subjects: ['Literature', 'English'],
+    lessons: [], // Added empty lessons array
     classes: ['5A', '4B', '3C'],
-    birthday: new Date('1993-11-18'),
+    birthday: new Date('1993-11-18')
   },
   {
     id: '56092371',
@@ -198,11 +207,11 @@ export const teachersData = [
     sex: UserSex.MALE,
     createdAt: new Date(),
     subjects: ['Biology'],
+    lessons: [], // Added empty lessons array
     classes: ['5A', '4B', '3C'],
-    birthday: new Date('1989-03-22'),
-  },
-];
-
+    birthday: new Date('1989-03-22')
+  }
+]
 
 export const studentColHeaders = [
   {

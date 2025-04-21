@@ -2,7 +2,7 @@ import Image from 'next/image'
 import TableSearch from '@/components/TableSearch'
 import Pagination from '@/components/Pagination'
 import Table from '@/components/Table'
-import { role, resultColHeaders, resultsData } from '@/lib/data'
+import { role, resultColHeaders} from '@/lib/data'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
@@ -131,11 +131,11 @@ const ResultListPage = async ({
   ])
 
   const data = dataRes.map((item) => {
-    const assessment = item.exam || item.assignment
+    const assessment = item.exam || item.assignment;
 
-    if (!assessment) return null
+    if (!assessment) return null;
 
-    const isExam = 'startTime' in assessment
+    const isExam = 'startTime' in assessment;
 
     return {
       id: item.id,

@@ -2,9 +2,13 @@ import menuItems from '@/lib/menuData'
 import Link from 'next/link'
 import Image from 'next/image'
 import React from 'react'
-import { role } from '@/lib/data'
+import { currentUser } from '@clerk/nextjs/server';
+// import { role } from '@/lib/data'
 
-const Menu = () => {
+const Menu = async () => {
+  const user = await currentUser();
+  const role = user?.publicMetadata?.role as string;
+
   return (
     <div className="mt-4 text-sm">
       {menuItems.map((item) => (
@@ -35,6 +39,6 @@ const Menu = () => {
       ))}
     </div>
   )
-}
+};
 
-export default Menu
+export default Menu;

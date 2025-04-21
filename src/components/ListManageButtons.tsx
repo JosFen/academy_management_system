@@ -1,4 +1,3 @@
-import { role } from '@/lib/data'
 import Image from 'next/image'
 import FormModal from './FormModal'
 const ListManageButtons = () => {
@@ -11,7 +10,7 @@ const ListManageButtons = () => {
         <Image src="/sort.png" width={15} height={15} alt="sort" />
       </button>
 
-      {role === 'admin' && <FormModal table="teacher" type="create" />}
+      {/* {role === 'admin' && <FormModal table="teacher" type="create" />} */}
     </div>
   )
 }

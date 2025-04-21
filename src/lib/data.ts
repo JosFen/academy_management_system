@@ -569,11 +569,12 @@ export const classColHeaders = [
     header: 'Supervisor',
     key: 'supervisor',
     className: 'hidden md:table-cell'
-  },
-  {
-    header: 'Actions',
-    key: 'action'
   }
+  // ,
+  // {
+  //   header: 'Actions',
+  //   key: 'action'
+  // }
 ]
 
 export const classesData = [
@@ -853,11 +854,12 @@ export const assignmentColHeaders = [
   {
     header: 'Due Date',
     key: 'dueDate'
-  },
-  {
-    header: 'Actions',
-    key: 'action'
   }
+  // ,
+  // {
+  //   header: 'Actions',
+  //   key: 'action'
+  // }
 ]
 
 export const assignmentsData = [
@@ -1194,11 +1196,11 @@ export const announcementColHeaders = [
   {
     header: 'Date',
     key: 'date'
-  },
-  {
-    header: 'Actions',
-    key: 'action'
   }
+  // {
+  //   header: 'Actions',
+  //   key: 'action'
+  // }
 ]
 
 export const announcementsData = [

@@ -756,11 +756,12 @@ export const examColHeaders = [
   {
     header: 'Time',
     key: 'time'
-  },
-  {
-    header: 'Actions',
-    key: 'action'
   }
+  // ,
+  // {
+  //   header: 'Actions',
+  //   key: 'action'
+  // }
 ]
 
 export const examsData = [

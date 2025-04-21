@@ -23,7 +23,7 @@ const AnnouncementListPage = async ({
 }) => {
   const {role, currentUserId} = await getUser();
   const isAuthrizedRole = role === 'admin';
-  const announcementHeaders = [...announcementColHeaders, ...(role === "admin"
+  const announcementHeaders = [...announcementColHeaders, ...(isAuthrizedRole
     ? [
         {
           header: "Actions",
@@ -43,7 +43,7 @@ const AnnouncementListPage = async ({
       <td className="flex items-center gap-4 p-3">
         <h1 className="font-semibold text-xs md:text-sm">{item.title}</h1>
       </td>
-      <td className="text-xs md:text-sm">{item.class.name}</td>
+      <td className="text-xs md:text-sm">{item.class?.name || '-'}</td>
       <td className="text-xs md:text-sm">
         {new Intl.DateTimeFormat('en-US', {
           year: 'numeric',
@@ -87,7 +87,19 @@ const AnnouncementListPage = async ({
       }
     }
   }
+  // ROLE OPTIONS: 
+  const roleOptions = {
+    teacher: { lessons: { some: { teacherId: currentUserId! } } },
+    student: { students: { some: { id: currentUserId! } } },
+    parent: { students: { some: { parentId: currentUserId! } } },
+  };
 
+  query.OR = [
+    { classId: null },
+    {
+      class: roleOptions[role as keyof typeof roleOptions] || {},
+    },
+  ];
   const [data, count] = await prisma.$transaction([
     prisma.announcement.findMany({
       where: query,

@@ -754,8 +754,8 @@ export const examColHeaders = [
     key: 'date'
   },
   {
-    header: 'Time',
-    key: 'time'
+    header: 'Start Time',
+    key: 'startTime'
   }
   // ,
   // {

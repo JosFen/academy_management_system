@@ -2,7 +2,7 @@ import Image from 'next/image'
 import TableSearch from '@/components/TableSearch'
 import Pagination from '@/components/Pagination'
 import Table from '@/components/Table'
-import { role, examColHeaders, examsData } from '@/lib/data'
+import { examColHeaders } from '@/lib/data'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
@@ -11,6 +11,7 @@ import FormModal from '@/components/FormModal'
 import { Class, Exam, Prisma, Subject, Teacher } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { ITEM_PER_PAGE } from '@/lib/settings'
+import { getUser } from '@/lib/auth/getUserRole'
 
 type ExamList = Exam & {
   lesson: {
@@ -19,6 +20,99 @@ type ExamList = Exam & {
     teacher: Teacher
   }
 }
+
+const ExamListPage = async ({
+  searchParams
+}: {
+  searchParams: { [key: string]: string | undefined }
+}) => {
+  const {role, currentUserId} = await getUser();
+  const isAuthrizedRole = role === 'admin';
+  const examHeaders = [...examColHeaders, ...(isAuthrizedRole
+    ? [
+        {
+          header: "Actions",
+          key: "action",
+        },
+      ]
+    : []),
+  ];
+  
+  const { page, ...queryParams } = searchParams
+  const p = page ? parseInt(page) : 1
+
+  // URL PARAMS CONDITION
+  let query: Prisma.ExamWhereInput = {}
+
+  query.lesson = {}
+
+  if (queryParams) {
+    for (const [key, value] of Object.entries(queryParams)) {
+      if (value !== undefined) {
+        switch (key) {
+          case 'classId':
+            query.lesson.classId = parseInt(value)
+            break
+          case 'teacherId':
+            query.lesson.teacherId = value
+            break
+          case 'search':
+            query.lesson.subject = {
+              name: { contains: value, mode: 'insensitive' }
+            }
+            break
+          default:
+            break
+        }
+      }
+    }
+  }
+
+
+  // ROLE CONDITIONS
+  const roleOptions = {
+    teacher: { lesson: { teacherId: currentUserId! } },
+    student: { 
+      lesson: { 
+        class: { 
+          students: { some: { id: currentUserId! } } 
+        } 
+      } 
+    },
+    parent: { 
+      lesson: { 
+        class: { 
+          students: { some: { parentId: currentUserId! } } 
+        } 
+      } 
+    }
+  };
+  
+  if (role !== "admin") {
+    query = {
+      ...query,
+      ...(roleOptions[role as keyof typeof roleOptions] || {})
+    };
+  }
+
+  const [data, count] = await prisma.$transaction([
+    prisma.exam.findMany({
+      where: query,
+      include: {
+        lesson: {
+          select: {
+            subject: { select: { name: true } },
+            teacher: { select: { name: true, surname: true } },
+            class: { select: { name: true } }
+          }
+        }
+      },
+      take: ITEM_PER_PAGE,
+      skip: ITEM_PER_PAGE * (p - 1)
+    }),
+    prisma.exam.count({ where: query })
+  ])
+
 
 const renderRow = (item: ExamList) => (
   <tr
@@ -51,71 +145,18 @@ const renderRow = (item: ExamList) => (
             <FontAwesomeIcon icon={faEye} className="w-4 h-4" />
           </button>
         </Link>
-        {role === 'admin' && (
-          <>
-            {/* <FormModal table="subject" type="update" /> */}
-            {/* <FormModal table="subject" type="create" /> */}
-            <FormModal table="subject" type="delete" id={item.id} />
-          </>
-        )}
+        {isAuthrizedRole && (
+            <>
+              {/* <FormModal table="subject" type="update" /> */}
+              <FormModal table="exam" type="update" id={item.id} />
+              <FormModal table="exam" type="delete" id={item.id} />
+            </>
+          )}
       </div>
     </td>
   </tr>
 )
 
-const ExamListPage = async ({
-  searchParams
-}: {
-  searchParams: { [key: string]: string | undefined }
-}) => {
-  const { page, ...queryParams } = searchParams
-
-  const p = page ? parseInt(page) : 1
-
-  // URL PARAMS CONDITION
-
-  const query: Prisma.ExamWhereInput = {}
-
-  query.lesson = {}
-  if (queryParams) {
-    for (const [key, value] of Object.entries(queryParams)) {
-      if (value !== undefined) {
-        switch (key) {
-          case 'classId':
-            query.lesson.classId = parseInt(value)
-            break
-          case 'teacherId':
-            query.lesson.teacherId = value
-            break
-          case 'search':
-            query.lesson.subject = {
-              name: { contains: value, mode: 'insensitive' }
-            }
-            break
-          default:
-            break
-        }
-      }
-    }
-  }
-
-  const [data, count] = await prisma.$transaction([
-    prisma.exam.findMany({
-      where: query,
-      include: {
-        lesson: {
-          select: {
-            subject: { select: { name: true } },
-            teacher: { select: { name: true, surname: true } },
-            class: { select: { name: true } }
-          }
-        }
-      },
-      take: ITEM_PER_PAGE,
-      skip: ITEM_PER_PAGE * (p - 1)
-    }),
-    prisma.exam.count({ where: query })
-  ])
 
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
@@ -131,7 +172,7 @@ const ExamListPage = async ({
       </div>
 
       {/* Teacher List */}
-      <Table colHeaders={examColHeaders} renderRow={renderRow} data={data} />
+      <Table colHeaders={examHeaders} renderRow={renderRow} data={data} />
       {/* Pagination */}
       <Pagination page={p} count={count} />
     </div>

@@ -664,11 +664,11 @@ export const lessonColHeaders = [
     header: 'Teacher',
     key: 'teacher',
     className: 'hidden md:table-cell'
-  },
-  {
-    header: 'Actions',
-    key: 'action'
   }
+  // {
+  //   header: 'Actions',
+  //   key: 'action'
+  // }
 ]
 
 export const lessonsData = [

@@ -167,7 +167,10 @@ const renderRow = (item: ExamList) => (
         </h1>
         <div className="flex flex-col md:flex-row gap-4 items-center w-full md:w-auto">
           <TableSearch />
-          <ListManageButtons />
+          <div className="flex items-center gap-4 self-end">
+            <ListManageButtons />
+            {isAuthrizedRole && <FormModal table="class" type="create" />}
+          </div>
         </div>
       </div>
 

@@ -963,10 +963,6 @@ export const resultColHeaders = [
   {
     header: 'Date',
     key: 'date'
-  },
-  {
-    header: 'Actions',
-    key: 'action'
   }
 ]
 

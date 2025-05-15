@@ -33,10 +33,6 @@ export const teacherColHeaders = [
     header: 'Address',
     key: 'address',
     className: 'hidden xl:table-cell'
-  },
-  {
-    header: 'Actions',
-    key: 'action'
   }
 ]
 
@@ -242,11 +238,12 @@ export const studentColHeaders = [
     header: 'Address',
     key: 'address',
     className: 'hidden xl:table-cell'
-  },
-  {
-    header: 'Actions',
-    key: 'action'
   }
+  // ,
+  // {
+  //   header: 'Actions',
+  //   key: 'action'
+  // }
 ]
 
 export const studentsData = [

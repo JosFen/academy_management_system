@@ -12,37 +12,9 @@ import { Prisma, Subject, Teacher } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { ITEM_PER_PAGE } from '@/lib/settings'
 
-type SubjectList = Subject & { teachers: Teacher[] }
+ {/* only admin can access this page */}
 
-const renderRow = (item: SubjectList) => (
-  <tr
-    key={item.id}
-    className="border-b border-gray-100 even:bg-slate-50 text-sm hover:bg-blue-100"
-  >
-    <td className="flex items-center gap-4 p-3">
-      <h1 className="font-semibold text-xs md:text-sm">{item.name}</h1>
-    </td>
-    <td className="text-xs md:text-sm">
-      {item.teachers.map((teacher) => teacher.name).join(', ')}
-    </td>
-    <td>
-      <div className="flex items-center gap-2">
-        <Link href={`/list/parents/${item.id}`}>
-          <button className="w-7 h-7 flex items-center justify-center  rounded-full bg-blue-300 text-white hover:bg-blue-500 focus:outline-none">
-            <FontAwesomeIcon icon={faEye} className="w-4 h-4" />
-          </button>
-        </Link>
-        {role === 'admin' && (
-          <>
-            {/* <FormModal table="subject" type="update" /> */}
-            {/* <FormModal table="subject" type="create" /> */}
-            <FormModal table="subject" type="delete" id={item.id} />
-          </>
-        )}
-      </div>
-    </td>
-  </tr>
-)
+type SubjectList = Subject & { teachers: Teacher[] }
 
 const SubjectListPage = async ({
   searchParams
@@ -80,6 +52,36 @@ const SubjectListPage = async ({
     prisma.subject.count({ where: query })
   ])
 
+  const renderRow = (item: SubjectList) => (
+    <tr
+      key={item.id}
+      className="border-b border-gray-100 even:bg-slate-50 text-sm hover:bg-blue-100"
+    >
+      <td className="flex items-center gap-4 p-3">
+        <h1 className="font-semibold text-xs md:text-sm">{item.name}</h1>
+      </td>
+      <td className="text-xs md:text-sm">
+        {item.teachers.map((teacher) => teacher.name).join(', ')}
+      </td>
+      <td>
+        <div className="flex items-center gap-2">
+          <Link href={`/list/parents/${item.id}`}>
+            <button className="w-7 h-7 flex items-center justify-center  rounded-full bg-blue-300 text-white hover:bg-blue-500 focus:outline-none">
+              <FontAwesomeIcon icon={faEye} className="w-4 h-4" />
+            </button>
+          </Link>
+          {role === 'admin' && (
+            <>
+              {/* <FormModal table="subject" type="update" /> */}
+              <FormModal table="subject" type="delete" id={item.id} />
+            </>
+          )}
+        </div>
+      </td>
+    </tr>
+  )
+
+
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
       {/* TOP Search */}
@@ -90,6 +92,7 @@ const SubjectListPage = async ({
         <div className="flex flex-col md:flex-row gap-4 items-center w-full md:w-auto">
           <TableSearch />
           <ListManageButtons />
+          <FormModal table="subject" type="create" /> 
         </div>
       </div>
 

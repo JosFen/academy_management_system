@@ -81,11 +81,9 @@ const ResultListPage = async ({
         { assignment: { lesson: { teacherId: currentUserId! } } },
       ];
       break;
-
     case "student":
       query.studentId = currentUserId!;
       break;
-
     case "parent":
       query.student = {
         parentId: currentUserId!,

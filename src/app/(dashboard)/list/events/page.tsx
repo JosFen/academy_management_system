@@ -79,7 +79,7 @@ const ResultListPage = async ({
     }),
     prisma.event.count({ where: query })
   ])
-
+ 
   // console.log('Event List:', data);
 
 

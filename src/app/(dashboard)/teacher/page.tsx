@@ -13,7 +13,7 @@ const Teacherpage = () => (
     </div>
     {/* RIGHT PANEL */}
     <div className="w-full lg:w-1/3 flex flex-col gap-4">
-      {/* <EventCalendar /> */}
+      <EventCalendar />
       <Announcemens />
     </div>
   </div>

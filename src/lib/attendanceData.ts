@@ -1,38 +1,38 @@
 const attendanceData = [
   {
     name: 'Mon',
-    present: 1200,
-    absent: 200
+    present: 48,
+    absent: 2
   },
   {
     name: 'Tue',
-    present: 1150,
-    absent: 250
+    present: 45,
+    absent: 5
   },
   {
     name: 'Wed',
-    present: 1300,
-    absent: 100
+    present: 30,
+    absent: 20
   },
   {
     name: 'Thu',
-    present: 1250,
-    absent: 150
+    present: 50,
+    absent: 0
   },
   {
     name: 'Fri',
-    present: 1100,
-    absent: 300
+    present: 47,
+    absent: 3
   },
   {
     name: 'Sat',
-    present: 800,
-    absent: 400
+    present: 30,
+    absent: 20
   },
   {
     name: 'Sun',
-    present: 500,
-    absent: 600
+    present: 35,
+    absent: 15
   }
 ]
 

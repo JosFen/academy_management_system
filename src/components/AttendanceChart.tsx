@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import React, { PureComponent } from 'react'
+import React from 'react'
 import {
   BarChart,
   Bar,
@@ -13,8 +13,29 @@ import {
   ResponsiveContainer
 } from 'recharts'
 import attendanceData from '@/lib/attendanceData'
+// import { prisma } from '@/lib/prisma'
 
 const AttendanceChart = () => {
+  // const today = new Date();
+  // const dayOfWeek = today.getDay();
+  // const daysPassedThisWeek = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+  // const recentMonday = new Date();
+  // recentMonday.setDate(today.getDate() - daysPassedThisWeek);
+
+  // const recentWeekData= await prisma.attendance.findMany({
+  //   where: {
+  //     date: {
+  //       gte: recentMonday,
+  //     },
+  //   },
+  //   select: {
+  //     date: true,
+  //     present: true,
+  //   },
+  // });
+
+  // console.log( recentWeekData);
+
   return (
     <div className="bg-white rounded-lg p-4 h-full">
       <div className="flex justify-between items-center">

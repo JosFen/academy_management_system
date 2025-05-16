@@ -1088,10 +1088,6 @@ export const eventColHeaders = [
     header: 'End Time',
     key: 'endTime'
     // className: "hidden md:table-cell",
-  },
-  {
-    header: 'Actions',
-    key: 'action'
   }
 ]
 

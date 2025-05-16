@@ -59,12 +59,14 @@ const ResultListPage = async ({
     parent: { students: { some: { parentId: currentUserId! } } },
   };
 
-  query.OR = [
-    { classId: null },
-    {
-      class: roleOptions[role as keyof typeof roleOptions] || {},
-    },
-  ];
+  if (!isAuthrizedRole) {
+    query.OR = [
+      { classId: null },
+      {
+        class: roleOptions[role as keyof typeof roleOptions] || {},
+      },
+    ];
+  }
 
   const [data, count] = await prisma.$transaction([
     prisma.event.findMany({
@@ -77,6 +79,8 @@ const ResultListPage = async ({
     }),
     prisma.event.count({ where: query })
   ])
+
+  console.log('Event List:', data);
 
 
   const renderRow = (item: EventList) => (

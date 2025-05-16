@@ -80,7 +80,7 @@ const ResultListPage = async ({
     prisma.event.count({ where: query })
   ])
 
-  console.log('Event List:', data);
+  // console.log('Event List:', data);
 
 
   const renderRow = (item: EventList) => (

@@ -7,11 +7,11 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import ListManageButtons from '@/components/ListManageButtons'
-import FormModal from '@/components/FormModal'
 import { Class, Prisma, Student } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { ITEM_PER_PAGE } from '@/lib/settings'
 import { getUser } from '@/lib/auth/getUserRole'
+import FormContainer from '@/components/forms/FormContainer'
 
 type StudentList = Student & { class: Class }
 
@@ -104,8 +104,8 @@ const StudentListPage = async ({
           </Link>
          {isAuthrizedRole && (
             <>
-              {/* <FormModal table="student" type="update" id={item.id} /> */}
-              <FormModal table="student" type="delete" id={item.id} />
+              <FormContainer table="student" type="update" id={item.id} />
+              <FormContainer table="student" type="delete" id={item.id} />
             </>
           )}
         </div>
@@ -124,7 +124,7 @@ const StudentListPage = async ({
           <TableSearch />
           <div className="flex items-center gap-4 self-end">
             <ListManageButtons />
-            {isAuthrizedRole && <FormModal table="student" type="create" />}
+            {isAuthrizedRole && <FormContainer table="student" type="create" />}
           </div>
         </div>
       </div>

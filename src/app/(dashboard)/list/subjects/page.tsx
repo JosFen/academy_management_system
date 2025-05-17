@@ -11,6 +11,7 @@ import FormModal from '@/components/FormModal'
 import { Prisma, Subject, Teacher } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { ITEM_PER_PAGE } from '@/lib/settings'
+import FormContainer from '@/components/forms/FormContainer'
 
  {/* only admin can access this page */}
 
@@ -65,15 +66,15 @@ const SubjectListPage = async ({
       </td>
       <td>
         <div className="flex items-center gap-2">
-          <Link href={`/list/parents/${item.id}`}>
+          {/* <Link href={`/list/parents/${item.id}`}>
             <button className="w-7 h-7 flex items-center justify-center  rounded-full bg-blue-300 text-white hover:bg-blue-500 focus:outline-none">
               <FontAwesomeIcon icon={faEye} className="w-4 h-4" />
             </button>
-          </Link>
+          </Link> */}
           {role === 'admin' && (
             <>
-              {/* <FormModal table="subject" type="update" /> */}
-              <FormModal table="subject" type="delete" id={item.id} />
+              <FormContainer table="subject" type="update" data={item} />
+              <FormContainer table="subject" type="delete" id={item.id} />
             </>
           )}
         </div>
@@ -92,7 +93,7 @@ const SubjectListPage = async ({
         <div className="flex flex-col md:flex-row gap-4 items-center w-full md:w-auto">
           <TableSearch />
           <ListManageButtons />
-          <FormModal table="subject" type="create" /> 
+          <FormContainer table="subject" type="create" /> 
         </div>
       </div>
 

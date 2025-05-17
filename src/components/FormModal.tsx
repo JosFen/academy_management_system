@@ -9,7 +9,30 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { deleteClass, deleteExam, deleteStudent, deleteSubject, deleteTeacher } from '@/lib/formActions'
+import { FormContainerProps } from './forms/FormContainer'
+import { useFormState } from 'react-dom'
+import { useRouter } from "next/navigation";
+import { toast } from 'react-toastify'
+
+
+
+const deleteActionMap = {
+  subject: deleteSubject,
+  class: deleteClass,
+  teacher: deleteTeacher,
+  student: deleteStudent,
+  exam: deleteExam,
+// OTHER DELETE ACTIONS
+  parent: deleteSubject,
+  lesson: deleteSubject,
+  assignment: deleteSubject,
+  result: deleteSubject,
+  attendance: deleteSubject,
+  event: deleteSubject,
+  announcement: deleteSubject,
+};
 
 // USE LAZY LOADING
 
@@ -22,37 +45,60 @@ const TeacherForm = dynamic(() => import('./forms/TeacherForm'), {
 const StudentForm = dynamic(() => import('./forms/StudentForm'), {
   loading: () => <h1>Loading...</h1>
 })
+const SubjectForm = dynamic(() => import("./forms/SubjectForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
+// const ClassForm = dynamic(() => import("./forms/ClassForm"), {
+//   loading: () => <h1>Loading...</h1>,
+// });
+// const ExamForm = dynamic(() => import("./forms/ExamForm"), {
+//   loading: () => <h1>Loading...</h1>,
+// });
+
 
 const forms: {
-  [key: string]: (type: 'create' | 'update', data?: any) => JSX.Element
+  [key: string]: (
+    setOpen: Dispatch<SetStateAction<boolean>>,
+    type: "create" | "update",
+    data?: any,
+    relatedData?: any
+  ) => JSX.Element;
 } = {
-  teacher: (type, data) => <TeacherForm type={type} data={data} />,
-  student: (type, data) => <StudentForm type={type} data={data} />
-}
+  subject: (setOpen, type, data, relatedData) => (
+    <SubjectForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
+  ),
+  teacher: (setOpen, type, data, relatedData) => (
+    <TeacherForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
+  ),
+  student: (setOpen, type, data, relatedData) => (
+    <StudentForm
+      type={type}
+      data={data}
+      setOpen={setOpen}
+      relatedData={relatedData}
+    />
+  ),
+  // OTHER LIST ITEMS:
+};
+
 
 const FormModal = ({
   table,
   type,
   data,
-  id
-}: {
-  table:
-    | 'teacher'
-    | 'student'
-    | 'parent'
-    | 'subject'
-    | 'class'
-    | 'lesson'
-    | 'exam'
-    | 'assignment'
-    | 'result'
-    | 'attendance'
-    | 'event'
-    | 'announcement'
-  type: 'create' | 'update' | 'delete'
-  data?: any
-  id?: number | string
-}) => {
+  id,
+  relatedData,
+}: FormContainerProps & { relatedData?: any }) => {
   const icon =
     type === 'delete' ? faTrashAlt : type === 'update' ? faEdit : faPlus
   // TAILWIND DYNAMIC CLASS:
@@ -67,17 +113,33 @@ const FormModal = ({
   const [open, setOpen] = useState(false)
 
   const Form = () => {
+    const [state, formAction] = useFormState(deleteActionMap[table], {
+      success: false,
+      error: false,
+    });
+
+    const router = useRouter();
+
+    useEffect(() => {
+      if (state.success) {
+        toast(`${table} has been deleted!`);
+        setOpen(false);
+        router.refresh();
+      }
+    }, [state, router]);
+    
     return type === 'delete' && id ? (
-      <form action="" className="p-4 flex flex-col gap-4">
+      <form action={formAction} className="p-4 flex flex-col gap-4">
+        <input type="text | number" name="id" value={id} hidden />
         <span className="text-center font-medium">
-          All data will be lost. Are you sure you want to delete this {table}?
+        Are you sure you want to delete this {table}?
         </span>
         <button className="bg-red-700 text-white py-2 px-4 rounded-md border-none w-max self-center">
           Delete
         </button>
       </form>
     ) : type === 'create' || type === 'update' ? (
-      forms[table](type, data)
+      forms[table](setOpen, type, data, relatedData)
     ) : (
       'Form not found!'
     )
@@ -85,12 +147,6 @@ const FormModal = ({
 
   return (
     <>
-      {/* <button
-        className={`${size} flex items-center justify-center rounded-full ${bgColor}`}
-        onClick={() => setOpen(true)}
-      >
-        <Image src={`/${type}.png`} alt="" width={16} height={16} />
-      </button> */}
       <button
         onClick={() => setOpen(true)}
         className={`w-7 h-7 flex items-center justify-center rounded-full text-white ${bgColor} focus:outline-none `}
@@ -114,4 +170,4 @@ const FormModal = ({
   )
 }
 
-export default FormModal
+export default FormModal;

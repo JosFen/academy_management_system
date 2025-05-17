@@ -81,7 +81,7 @@ The admin can perform CRUD operations on:
 ---
 ## 🚀 Deployment Status
 
-This application is under active development and is planned to be deployed soon.
+This application is in the final stage of backend development and is being prepared for deployment.
 🔧 Deployment pipeline and CI/CD setup are in progress.
 ✅ Stay tuned for the live production URL.
 

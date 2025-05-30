@@ -73,7 +73,6 @@ const StudentListPage = async ({
       orderBy: {
         createdAt: 'desc'
       }
-
     }),
     prisma.student.count({ where: query })
   ])

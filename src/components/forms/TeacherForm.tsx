@@ -1,67 +1,67 @@
-"use client";
+'use client'
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import InputField from "../InputField";
-import Image from "next/image";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { useFormState } from "react-dom";
-import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
-import { CldUploadWidget } from "next-cloudinary";
-import { teacherSchema, TeacherSchema } from "@/lib/formValidationSchema";
-import { createTeacher, updateTeacher } from "@/lib/formActions";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import InputField from '../InputField'
+import Image from 'next/image'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { useFormState } from 'react-dom'
+import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
+import { CldUploadWidget } from 'next-cloudinary'
+import { teacherSchema, TeacherSchema } from '@/lib/formValidationSchema'
+import { createTeacher, updateTeacher } from '@/lib/formActions'
 
 const TeacherForm = ({
   type,
   data,
   setOpen,
-  relatedData,
+  relatedData
 }: {
-  type: "create" | "update";
-  data?: any;
-  setOpen: Dispatch<SetStateAction<boolean>>;
-  relatedData?: any;
+  type: 'create' | 'update'
+  data?: any
+  setOpen: Dispatch<SetStateAction<boolean>>
+  relatedData?: any
 }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<TeacherSchema>({
-    resolver: zodResolver(teacherSchema),
-  });
+    resolver: zodResolver(teacherSchema)
+  })
 
-  const [img, setImg] = useState<any>();
+  const [img, setImg] = useState<any>()
 
   const [state, formAction] = useFormState(
-    type === "create" ? createTeacher : updateTeacher,
+    type === 'create' ? createTeacher : updateTeacher,
     {
       success: false,
-      error: false,
+      error: false
     }
-  );
+  )
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
-    formAction({ ...data, img: img?.secure_url });
-  });
+    console.log(data)
+    formAction({ ...data, img: img?.secure_url })
+  })
 
-  const router = useRouter();
+  const router = useRouter()
 
   useEffect(() => {
     if (state.success) {
-      toast(`Teacher has been ${type === "create" ? "created" : "updated"}!`);
-      setOpen(false);
-      router.refresh();
+      toast(`Teacher has been ${type === 'create' ? 'created' : 'updated'}!`)
+      setOpen(false)
+      router.refresh()
     }
-  }, [state, router, type, setOpen]);
+  }, [state, router, type, setOpen])
 
-  const { subjects } = relatedData || {};
+  const { subjects } = relatedData || {}
 
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
       <h1 className="text-xl font-semibold">
-        {type === "create" ? "Create a new teacher" : "Update the teacher"}
+        {type === 'create' ? 'Create a new teacher' : 'Update the teacher'}
       </h1>
       <span className="text-xs text-gray-400 font-medium">
         Authentication Information
@@ -132,7 +132,7 @@ const TeacherForm = ({
         <InputField
           label="Birthday"
           name="birthday"
-          defaultValue={data?.birthday.toISOString().split("T")[0]}
+          defaultValue={data?.birthday.toISOString().split('T')[0]}
           register={register}
           error={errors.birthday}
           type="date"
@@ -151,7 +151,7 @@ const TeacherForm = ({
           <label className="text-xs text-gray-500">Sex</label>
           <select
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
-            {...register("sex")}
+            {...register('sex')}
             defaultValue={data?.sex}
           >
             <option value="MALE">Male</option>
@@ -168,7 +168,7 @@ const TeacherForm = ({
           <select
             multiple
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
-            {...register("subjects")}
+            {...register('subjects')}
             defaultValue={data?.subjects}
           >
             {subjects?.map((subject: { id: number; name: string }) => (
@@ -186,8 +186,8 @@ const TeacherForm = ({
         <CldUploadWidget
           uploadPreset="academy"
           onSuccess={(result, { widget }) => {
-            setImg(result.info);
-            widget.close();
+            setImg(result.info)
+            widget.close()
           }}
         >
           {({ open }) => {
@@ -199,28 +199,27 @@ const TeacherForm = ({
                 <Image src="/upload.png" alt="" width={28} height={28} />
                 <span>Upload a photo</span>
                 {img && (
-                <Image
-                  src={img.secure_url}
-                  alt="Uploaded Image"
-                  width={50}
-                  height={50}
-                  className="rounded-md"
-                />
-              )}
+                  <Image
+                    src={img.secure_url}
+                    alt="Uploaded Image"
+                    width={50}
+                    height={50}
+                    className="rounded-md"
+                  />
+                )}
               </div>
-            );
+            )
           }}
         </CldUploadWidget>
-        
       </div>
       {state.error && (
         <span className="text-red-500">Something went wrong!</span>
       )}
       <button className="bg-blue-400 text-white p-2 rounded-md">
-        {type === "create" ? "Create" : "Update"}
+        {type === 'create' ? 'Create' : 'Update'}
       </button>
     </form>
-  );
-};
+  )
+}
 
-export default TeacherForm;
+export default TeacherForm

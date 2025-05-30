@@ -18,24 +18,23 @@ const SingleStudentPage = async ({
 }: {
   params: { id: string }
 }) => {
-   const { role, currentUserId } = await getUser();
-  const isAuthrizedRole = role === 'admin';
+  const { role, currentUserId } = await getUser()
+  const isAuthrizedRole = role === 'admin'
   const student:
     | (Student & {
-        class: Class & { _count: { lessons: number } };
+        class: Class & { _count: { lessons: number } }
       })
     | null = await prisma.student.findUnique({
     where: { id },
     include: {
-      class: { include: { _count: { select: { lessons: true } } } },
-    },
-  });
+      class: { include: { _count: { select: { lessons: true } } } }
+    }
+  })
 
   if (!student) {
-    return notFound();
+    return notFound()
   }
 
-  
   return (
     <div className="flex-1 p-4 flex flex-col gap-4 xl:flex-row">
       {/* LEFT */}
@@ -46,7 +45,7 @@ const SingleStudentPage = async ({
           <div className="bg-indigo-100 py-6 px-4 rounded-md flex-1 flex gap-4">
             <div className="w-1/3">
               <Image
-                src={student.img || "/avatar.png"}
+                src={student.img || '/avatar.png'}
                 alt=""
                 width={140}
                 height={140}
@@ -56,14 +55,10 @@ const SingleStudentPage = async ({
             <div className="w-2/3 flex flex-col justify-between gap-4">
               <div className="flex items-center gap-4">
                 <h1 className="text-xl font-semibold">
-                   {student.name + " " + student.surname}
+                  {student.name + ' ' + student.surname}
                 </h1>
                 {role === 'admin' && (
-                  <FormContainer
-                    table="student"
-                    type="update"
-                    data={student}
-                  />
+                  <FormContainer table="student" type="update" data={student} />
                 )}
               </div>
               <p className="text-sm text-gray-500">
@@ -77,15 +72,17 @@ const SingleStudentPage = async ({
                 </div>
                 <div className="w-full md:w-1/3 lg:w-full 2xl:w-1/3 flex items-center gap-2">
                   <Image src="/date.png" alt="" width={14} height={14} />
-                  <span>{new Intl.DateTimeFormat("en-US").format(student.birthday)}</span>
+                  <span>
+                    {new Intl.DateTimeFormat('en-US').format(student.birthday)}
+                  </span>
                 </div>
                 <div className="w-full md:w-1/3 lg:w-full 2xl:w-1/3 flex items-center gap-2">
                   <Image src="/mail.png" alt="" width={14} height={14} />
-                  <span>{student.email || "-"}</span>
+                  <span>{student.email || '-'}</span>
                 </div>
                 <div className="w-full md:w-1/3 lg:w-full 2xl:w-1/3 flex items-center gap-2">
                   <Image src="/phone.png" alt="" width={14} height={14} />
-                  <span>{student.phone || "-"}</span>
+                  <span>{student.phone || '-'}</span>
                 </div>
               </div>
             </div>
@@ -116,7 +113,10 @@ const SingleStudentPage = async ({
                 className="w-6 h-6"
               />
               <div className="">
-                <h1 className="text-xl font-semibold"> {student.class.name.charAt(0)}th</h1>
+                <h1 className="text-xl font-semibold">
+                  {' '}
+                  {student.class.name.charAt(0)}th
+                </h1>
                 <span className="text-sm text-gray-400">Grade</span>
               </div>
             </div>
@@ -130,7 +130,10 @@ const SingleStudentPage = async ({
                 className="w-6 h-6"
               />
               <div className="">
-                <h1 className="text-xl font-semibold"> {student.class._count.lessons}</h1>
+                <h1 className="text-xl font-semibold">
+                  {' '}
+                  {student.class._count.lessons}
+                </h1>
                 <span className="text-sm text-gray-400">Lessons</span>
               </div>
             </div>
@@ -153,7 +156,7 @@ const SingleStudentPage = async ({
         {/* BOTTOM */}
         <div className="mt-4 bg-white rounded-md p-4 h-[800px]">
           <h2 className="font-semibold">Student&apos;s Schedule</h2>
-          <ScheduleCalendarContainer  type='classId' id={student.class.id} />
+          <ScheduleCalendarContainer type="classId" id={student.class.id} />
         </div>
       </div>
       {/* RIGHT */}
@@ -161,7 +164,10 @@ const SingleStudentPage = async ({
         <div className="bg-white p-4 rounded-md">
           <h2 className="text-lg font-semibold">Shortcuts</h2>
           <div className="mt-4 flex gap-4 flex-wrap text-xs text-gray-500">
-            <Link className="p-3 rounded-md bg-green-50" href={`/list/lessons?classId=${student.class.id}`}>
+            <Link
+              className="p-3 rounded-md bg-green-50"
+              href={`/list/lessons?classId=${student.class.id}`}
+            >
               Student&apos;s Classes
             </Link>
             <Link
@@ -170,13 +176,22 @@ const SingleStudentPage = async ({
             >
               Student&apos;s Teachers
             </Link>
-            <Link className="p-3 rounded-md bg-orange-50" href={`/list/exams?classId=${student.class.id}`}>
+            <Link
+              className="p-3 rounded-md bg-orange-50"
+              href={`/list/exams?classId=${student.class.id}`}
+            >
               Student&apos;s Exams
             </Link>
-            <Link className="p-3 rounded-md bg-yellow-50" href={`/list/assignments?classId=${student.class.id}`}>
+            <Link
+              className="p-3 rounded-md bg-yellow-50"
+              href={`/list/assignments?classId=${student.class.id}`}
+            >
               Student&apos;s Assignments
             </Link>
-            <Link className="p-3 rounded-md bg-blue-50" href={`/list/results?studentId=${student.id}`}>
+            <Link
+              className="p-3 rounded-md bg-blue-50"
+              href={`/list/results?studentId=${student.id}`}
+            >
               Student&apos;s Results
             </Link>
           </div>

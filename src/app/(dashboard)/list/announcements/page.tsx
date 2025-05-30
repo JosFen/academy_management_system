@@ -2,7 +2,7 @@ import Image from 'next/image'
 import TableSearch from '@/components/TableSearch'
 import Pagination from '@/components/Pagination'
 import Table from '@/components/Table'
-import {  announcementColHeaders } from '@/lib/data'
+import { announcementColHeaders } from '@/lib/data'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
@@ -15,25 +15,24 @@ import { getUser } from '@/lib/auth/getUserRole'
 
 type AnnouncementList = Announcement & { class: Class }
 
-
 const AnnouncementListPage = async ({
   searchParams
 }: {
   searchParams: { [key: string]: string | undefined }
 }) => {
-  const {role, currentUserId} = await getUser();
-  const isAuthrizedRole = role === 'admin';
-  const announcementHeaders = [...announcementColHeaders, ...(isAuthrizedRole
-    ? [
-        {
-          header: "Actions",
-          key: "action",
-        },
-      ]
-    : []),
-  ];
-
-
+  const { role, currentUserId } = await getUser()
+  const isAuthrizedRole = role === 'admin'
+  const announcementHeaders = [
+    ...announcementColHeaders,
+    ...(isAuthrizedRole
+      ? [
+          {
+            header: 'Actions',
+            key: 'action'
+          }
+        ]
+      : [])
+  ]
 
   const renderRow = (item: AnnouncementList) => (
     <tr
@@ -87,19 +86,19 @@ const AnnouncementListPage = async ({
       }
     }
   }
-  // ROLE OPTIONS: 
+  // ROLE OPTIONS:
   const roleOptions = {
     teacher: { lessons: { some: { teacherId: currentUserId! } } },
     student: { students: { some: { id: currentUserId! } } },
-    parent: { students: { some: { parentId: currentUserId! } } },
-  };
+    parent: { students: { some: { parentId: currentUserId! } } }
+  }
 
   query.OR = [
     { classId: null },
     {
-      class: roleOptions[role as keyof typeof roleOptions] || {},
-    },
-  ];
+      class: roleOptions[role as keyof typeof roleOptions] || {}
+    }
+  ]
   const [data, count] = await prisma.$transaction([
     prisma.announcement.findMany({
       where: query,
@@ -123,7 +122,9 @@ const AnnouncementListPage = async ({
           <TableSearch />
           <div className="flex items-center gap-4 self-end">
             <ListManageButtons />
-            {isAuthrizedRole && <FormModal table="announcement" type="create" />}
+            {isAuthrizedRole && (
+              <FormModal table="announcement" type="create" />
+            )}
           </div>
         </div>
       </div>

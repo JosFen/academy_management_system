@@ -2,7 +2,7 @@ import Image from 'next/image'
 import TableSearch from '@/components/TableSearch'
 import Pagination from '@/components/Pagination'
 import Table from '@/components/Table'
-import {  studentColHeaders } from '@/lib/data'
+import { studentColHeaders } from '@/lib/data'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
@@ -20,17 +20,19 @@ const StudentListPage = async ({
 }: {
   searchParams: { [key: string]: string | undefined }
 }) => {
-  const {role, currentUserId} = await getUser();
-  const isAuthrizedRole = role === 'admin';
-  const studentHeaders = [...studentColHeaders, ...(isAuthrizedRole
-    ? [
-        {
-          header: "Actions",
-          key: "action",
-        },
-      ]
-    : []),
-  ];
+  const { role, currentUserId } = await getUser()
+  const isAuthrizedRole = role === 'admin'
+  const studentHeaders = [
+    ...studentColHeaders,
+    ...(isAuthrizedRole
+      ? [
+          {
+            header: 'Actions',
+            key: 'action'
+          }
+        ]
+      : [])
+  ]
 
   const { page, ...queryParams } = searchParams
   const p = page ? parseInt(page as string) : 1
@@ -67,7 +69,11 @@ const StudentListPage = async ({
         class: true
       },
       take: ITEM_PER_PAGE,
-      skip: (p - 1) * ITEM_PER_PAGE
+      skip: (p - 1) * ITEM_PER_PAGE,
+      orderBy: {
+        createdAt: 'desc'
+      }
+
     }),
     prisma.student.count({ where: query })
   ])
@@ -102,9 +108,9 @@ const StudentListPage = async ({
               <FontAwesomeIcon icon={faEye} className="w-4 h-4" />
             </button>
           </Link>
-         {isAuthrizedRole && (
+          {isAuthrizedRole && (
             <>
-              <FormContainer table="student" type="update" id={item.id} />
+              {/* <FormContainer table="student" type="update" id={item.id} /> */}
               <FormContainer table="student" type="delete" id={item.id} />
             </>
           )}

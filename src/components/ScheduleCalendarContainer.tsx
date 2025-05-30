@@ -1,37 +1,36 @@
-import { prisma } from "@/lib/prisma";
-import ScheduleCalendar from "./ScheduleCalendar";
-import { toCurrentWeekSchedule } from "@/lib/helperFunctions";
-
+import { prisma } from '@/lib/prisma'
+import ScheduleCalendar from './ScheduleCalendar'
+import { toCurrentWeekSchedule } from '@/lib/helperFunctions'
 
 const ScheduleCalendarContainer = async ({
   type,
-  id,
+  id
 }: {
-  type: "teacherId" | "classId";
-  id: string | number;
+  type: 'teacherId' | 'classId'
+  id: string | number
 }) => {
   const lessonsData = await prisma.lesson.findMany({
     where: {
-      ...(type === "teacherId"
+      ...(type === 'teacherId'
         ? { teacherId: id as string }
-        : { classId: id as number }),
-    },
-  });
+        : { classId: id as number })
+    }
+  })
 
   const lessonScheduleData = lessonsData.map((lesson) => ({
     title: lesson.name,
     start: lesson.startTime,
     end: lesson.endTime,
-    allDay: false,
-  }));
+    allDay: false
+  }))
 
-  const schedule = toCurrentWeekSchedule(lessonScheduleData);
+  const schedule = toCurrentWeekSchedule(lessonScheduleData)
 
   return (
     <div className="">
       <ScheduleCalendar data={schedule} />
     </div>
-  );
-};
+  )
+}
 
 export default ScheduleCalendarContainer

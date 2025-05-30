@@ -22,18 +22,20 @@ const LessonListPage = async ({
 }: {
   searchParams: { [key: string]: string | undefined }
 }) => {
-  const {role, currentUserId} = await getUser();
-  const isAuthrizedRole = role === 'admin';
-  const lessonHeaders = [...lessonColHeaders, ...(isAuthrizedRole
-    ? [
-        {
-          header: "Actions",
-          key: "action",
-        },
-      ]
-    : []),
-  ];
-  
+  const { role, currentUserId } = await getUser()
+  const isAuthrizedRole = role === 'admin'
+  const lessonHeaders = [
+    ...lessonColHeaders,
+    ...(isAuthrizedRole
+      ? [
+          {
+            header: 'Actions',
+            key: 'action'
+          }
+        ]
+      : [])
+  ]
+
   const { page, ...queryParams } = searchParams
   const p = page ? parseInt(page) : 1
 
@@ -76,14 +78,15 @@ const LessonListPage = async ({
     prisma.lesson.count({ where: query })
   ])
 
-
   const renderRow = (item: LessonList) => (
     <tr
       key={item.id}
       className="border-b border-gray-100 even:bg-slate-50 text-sm hover:bg-blue-100"
     >
       <td className="flex items-center gap-4 p-3">
-        <h1 className="font-semibold text-xs md:text-sm">{item.subject.name}</h1>
+        <h1 className="font-semibold text-xs md:text-sm">
+          {item.subject.name}
+        </h1>
       </td>
       <td className="text-xs md:text-sm">{item.class.name}</td>
       <td className="text-xs md:text-sm hidden md:table-cell">
@@ -107,7 +110,6 @@ const LessonListPage = async ({
       </td>
     </tr>
   )
-
 
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">

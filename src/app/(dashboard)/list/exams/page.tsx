@@ -26,18 +26,20 @@ const ExamListPage = async ({
 }: {
   searchParams: { [key: string]: string | undefined }
 }) => {
-  const {role, currentUserId} = await getUser();
-  const isAuthrizedRole = role === 'admin';
-  const examHeaders = [...examColHeaders, ...(isAuthrizedRole
-    ? [
-        {
-          header: "Actions",
-          key: "action",
-        },
-      ]
-    : []),
-  ];
-  
+  const { role, currentUserId } = await getUser()
+  const isAuthrizedRole = role === 'admin'
+  const examHeaders = [
+    ...examColHeaders,
+    ...(isAuthrizedRole
+      ? [
+          {
+            header: 'Actions',
+            key: 'action'
+          }
+        ]
+      : [])
+  ]
+
   const { page, ...queryParams } = searchParams
   const p = page ? parseInt(page) : 1
 
@@ -68,31 +70,30 @@ const ExamListPage = async ({
     }
   }
 
-
   // ROLE CONDITIONS
   const roleOptions = {
     teacher: { lesson: { teacherId: currentUserId! } },
-    student: { 
-      lesson: { 
-        class: { 
-          students: { some: { id: currentUserId! } } 
-        } 
-      } 
+    student: {
+      lesson: {
+        class: {
+          students: { some: { id: currentUserId! } }
+        }
+      }
     },
-    parent: { 
-      lesson: { 
-        class: { 
-          students: { some: { parentId: currentUserId! } } 
-        } 
-      } 
+    parent: {
+      lesson: {
+        class: {
+          students: { some: { parentId: currentUserId! } }
+        }
+      }
     }
-  };
-  
-  if (role !== "admin") {
+  }
+
+  if (role !== 'admin') {
     query = {
       ...query,
       ...(roleOptions[role as keyof typeof roleOptions] || {})
-    };
+    }
   }
 
   const [data, count] = await prisma.$transaction([
@@ -113,50 +114,48 @@ const ExamListPage = async ({
     prisma.exam.count({ where: query })
   ])
 
+  const renderRow = (item: ExamList) => (
+    <tr
+      key={item.id}
+      className="border-b border-gray-100 even:bg-slate-50 text-sm hover:bg-blue-100"
+    >
+      <td className="flex items-center gap-4 p-3">
+        <h1 className="font-semibold text-xs md:text-sm">{item.title}</h1>
+      </td>
+      <td className="text-xs md:text-sm">{item.lesson.class?.name || '-'}</td>
 
-const renderRow = (item: ExamList) => (
-  <tr
-    key={item.id}
-    className="border-b border-gray-100 even:bg-slate-50 text-sm hover:bg-blue-100"
-  >
-    <td className="flex items-center gap-4 p-3">
-      <h1 className="font-semibold text-xs md:text-sm">{item.title}</h1>
-    </td>
-    <td className="text-xs md:text-sm">{item.lesson.class?.name || '-'}</td>
+      <td className="text-xs md:text-sm hidden md:table-cell">
+        {item.lesson.teacher?.name}
+      </td>
 
-    <td className="text-xs md:text-sm hidden md:table-cell">
-      {item.lesson.teacher?.name}
-    </td>
-
-    <td className="text-xs md:text-sm hidden md:table-cell">
-      {new Intl.DateTimeFormat('en-US').format(item.startTime)}
-    </td>
-    <td className="text-xs md:text-sm">
-      {item.endTime.toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-      })}
-    </td>
-    <td>
-      <div className="flex items-center gap-2">
-        <Link href={`/list/classes/${item.id}`}>
-          <button className="w-7 h-7 flex items-center justify-center  rounded-full bg-blue-300 text-white hover:bg-blue-500 focus:outline-none">
-            <FontAwesomeIcon icon={faEye} className="w-4 h-4" />
-          </button>
-        </Link>
-        {isAuthrizedRole && (
+      <td className="text-xs md:text-sm hidden md:table-cell">
+        {new Intl.DateTimeFormat('en-US').format(item.startTime)}
+      </td>
+      <td className="text-xs md:text-sm">
+        {item.endTime.toLocaleTimeString('en-US', {
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false
+        })}
+      </td>
+      <td>
+        <div className="flex items-center gap-2">
+          <Link href={`/list/classes/${item.id}`}>
+            <button className="w-7 h-7 flex items-center justify-center  rounded-full bg-blue-300 text-white hover:bg-blue-500 focus:outline-none">
+              <FontAwesomeIcon icon={faEye} className="w-4 h-4" />
+            </button>
+          </Link>
+          {isAuthrizedRole && (
             <>
               {/* <FormModal table="subject" type="update" /> */}
               <FormModal table="exam" type="update" id={item.id} />
               <FormModal table="exam" type="delete" id={item.id} />
             </>
           )}
-      </div>
-    </td>
-  </tr>
-)
-
+        </div>
+      </td>
+    </tr>
+  )
 
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">

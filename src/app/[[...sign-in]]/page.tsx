@@ -1,24 +1,24 @@
-"use client";
+'use client'
 
-import * as Clerk from "@clerk/elements/common";
-import * as SignIn from "@clerk/elements/sign-in";
-import { useUser } from "@clerk/nextjs";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import * as Clerk from '@clerk/elements/common'
+import * as SignIn from '@clerk/elements/sign-in'
+import { useUser } from '@clerk/nextjs'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 const LoginPage = () => {
-  const { isLoaded, isSignedIn, user } = useUser();
+  const { isLoaded, isSignedIn, user } = useUser()
 
-  const router = useRouter();
+  const router = useRouter()
 
   useEffect(() => {
-    const role = user?.publicMetadata.role;
+    const role = user?.publicMetadata.role
 
     if (role) {
-      router.push(`/${role}`);
+      router.push(`/${role}`)
     }
-  }, [user, router]);
+  }, [user, router])
 
   return (
     <div className="h-screen flex items-center justify-center bg-blue-100">
@@ -64,7 +64,7 @@ const LoginPage = () => {
         </SignIn.Step>
       </SignIn.Root>
     </div>
-  );
-};
+  )
+}
 
-export default LoginPage;
+export default LoginPage

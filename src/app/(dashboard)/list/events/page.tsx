@@ -20,22 +20,23 @@ const ResultListPage = async ({
 }: {
   searchParams: { [key: string]: string | undefined }
 }) => {
-  const {role, currentUserId} = await getUser();
-  const isAuthrizedRole = role === 'admin';
-  const eventHeaders = [...eventColHeaders, ...(isAuthrizedRole
-    ? [
-        {
-          header: "Actions",
-          key: "action",
-        },
-      ]
-    : []),
-  ];
+  const { role, currentUserId } = await getUser()
+  const isAuthrizedRole = role === 'admin'
+  const eventHeaders = [
+    ...eventColHeaders,
+    ...(isAuthrizedRole
+      ? [
+          {
+            header: 'Actions',
+            key: 'action'
+          }
+        ]
+      : [])
+  ]
 
   const { page, ...queryParams } = searchParams
   const p = page ? parseInt(page) : 1
-  
-  
+
   // URL PARAMS CONDITION
   const query: Prisma.EventWhereInput = {}
 
@@ -52,20 +53,20 @@ const ResultListPage = async ({
       }
     }
   }
-  // ROLE OPTIONS: 
+  // ROLE OPTIONS:
   const roleOptions = {
     teacher: { lessons: { some: { teacherId: currentUserId! } } },
     student: { students: { some: { id: currentUserId! } } },
-    parent: { students: { some: { parentId: currentUserId! } } },
-  };
+    parent: { students: { some: { parentId: currentUserId! } } }
+  }
 
   if (!isAuthrizedRole) {
     query.OR = [
       { classId: null },
       {
-        class: roleOptions[role as keyof typeof roleOptions] || {},
-      },
-    ];
+        class: roleOptions[role as keyof typeof roleOptions] || {}
+      }
+    ]
   }
 
   const [data, count] = await prisma.$transaction([
@@ -79,9 +80,8 @@ const ResultListPage = async ({
     }),
     prisma.event.count({ where: query })
   ])
- 
-  // console.log('Event List:', data);
 
+  // console.log('Event List:', data);
 
   const renderRow = (item: EventList) => (
     <tr
@@ -132,7 +132,6 @@ const ResultListPage = async ({
       </td>
     </tr>
   )
-
 
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">

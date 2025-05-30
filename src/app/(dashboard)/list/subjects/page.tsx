@@ -13,7 +13,9 @@ import { prisma } from '@/lib/prisma'
 import { ITEM_PER_PAGE } from '@/lib/settings'
 import FormContainer from '@/components/forms/FormContainer'
 
- {/* only admin can access this page */}
+{
+  /* only admin can access this page */
+}
 
 type SubjectList = Subject & { teachers: Teacher[] }
 
@@ -48,7 +50,8 @@ const SubjectListPage = async ({
         teachers: true
       },
       take: ITEM_PER_PAGE,
-      skip: (p - 1) * ITEM_PER_PAGE
+      skip: (p - 1) * ITEM_PER_PAGE,
+      orderBy: { id: 'desc' }
     }),
     prisma.subject.count({ where: query })
   ])
@@ -82,7 +85,6 @@ const SubjectListPage = async ({
     </tr>
   )
 
-
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
       {/* TOP Search */}
@@ -93,7 +95,7 @@ const SubjectListPage = async ({
         <div className="flex flex-col md:flex-row gap-4 items-center w-full md:w-auto">
           <TableSearch />
           <ListManageButtons />
-          <FormContainer table="subject" type="create" /> 
+          <FormContainer table="subject" type="create" />
         </div>
       </div>
 

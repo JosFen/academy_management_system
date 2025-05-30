@@ -2,7 +2,7 @@ import Image from 'next/image'
 import TableSearch from '@/components/TableSearch'
 import Pagination from '@/components/Pagination'
 import Table from '@/components/Table'
-import { resultColHeaders} from '@/lib/data'
+import { resultColHeaders } from '@/lib/data'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
@@ -30,17 +30,19 @@ const ResultListPage = async ({
 }: {
   searchParams: { [key: string]: string | undefined }
 }) => {
-  const {role, currentUserId} = await getUser();
-  const isAuthrizedRole = role === 'admin';
-  const resultHeaders = [...resultColHeaders, ...(isAuthrizedRole
-    ? [
-        {
-          header: "Actions",
-          key: "action",
-        },
-      ]
-    : []),
-  ];
+  const { role, currentUserId } = await getUser()
+  const isAuthrizedRole = role === 'admin'
+  const resultHeaders = [
+    ...resultColHeaders,
+    ...(isAuthrizedRole
+      ? [
+          {
+            header: 'Actions',
+            key: 'action'
+          }
+        ]
+      : [])
+  ]
 
   const { page, ...queryParams } = searchParams
 
@@ -61,7 +63,9 @@ const ResultListPage = async ({
             query.OR = [
               { exam: { title: { contains: value, mode: 'insensitive' } } },
               { student: { name: { contains: value, mode: 'insensitive' } } },
-              { assignment: { title: { contains: value, mode: 'insensitive' } } }
+              {
+                assignment: { title: { contains: value, mode: 'insensitive' } }
+              }
             ]
             break
           default:
@@ -73,24 +77,24 @@ const ResultListPage = async ({
 
   // ROLE CONDITIONS
   switch (role) {
-    case "admin":
-      break;
-    case "teacher":
+    case 'admin':
+      break
+    case 'teacher':
       query.OR = [
         { exam: { lesson: { teacherId: currentUserId! } } },
-        { assignment: { lesson: { teacherId: currentUserId! } } },
-      ];
-      break;
-    case "student":
-      query.studentId = currentUserId!;
-      break;
-    case "parent":
+        { assignment: { lesson: { teacherId: currentUserId! } } }
+      ]
+      break
+    case 'student':
+      query.studentId = currentUserId!
+      break
+    case 'parent':
       query.student = {
-        parentId: currentUserId!,
-      };
-      break;
+        parentId: currentUserId!
+      }
+      break
     default:
-      break;
+      break
   }
 
   const [dataRes, count] = await prisma.$transaction([
@@ -126,11 +130,11 @@ const ResultListPage = async ({
   ])
 
   const data = dataRes.map((item) => {
-    const assessment = item.exam || item.assignment;
+    const assessment = item.exam || item.assignment
 
-    if (!assessment) return null;
+    if (!assessment) return null
 
-    const isExam = 'startTime' in assessment;
+    const isExam = 'startTime' in assessment
 
     return {
       id: item.id,
@@ -144,7 +148,6 @@ const ResultListPage = async ({
       startTime: isExam ? assessment.startTime : assessment.startDate
     }
   })
-
 
   const renderRow = (item: ResultList) => (
     <tr
@@ -185,7 +188,6 @@ const ResultListPage = async ({
       </td>
     </tr>
   )
-
 
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">

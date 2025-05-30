@@ -1,70 +1,69 @@
-"use client";
+'use client'
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import InputField from "../InputField";
-import Image from "next/image";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import InputField from '../InputField'
+import Image from 'next/image'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
-import { useFormState } from "react-dom";
+import { useFormState } from 'react-dom'
 
-import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
-import { CldUploadWidget } from "next-cloudinary";
-import { studentSchema, StudentSchema } from "@/lib/formValidationSchema";
-import { createStudent, updateStudent } from "@/lib/formActions";
+import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
+import { CldUploadWidget } from 'next-cloudinary'
+import { studentSchema, StudentSchema } from '@/lib/formValidationSchema'
+import { createStudent, updateStudent } from '@/lib/formActions'
 
 const StudentForm = ({
   type,
   data,
   setOpen,
-  relatedData,
+  relatedData
 }: {
-  type: "create" | "update";
-  data?: any;
-  setOpen: Dispatch<SetStateAction<boolean>>;
-  relatedData?: any;
+  type: 'create' | 'update'
+  data?: any
+  setOpen: Dispatch<SetStateAction<boolean>>
+  relatedData?: any
 }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<StudentSchema>({
-    resolver: zodResolver(studentSchema),
-  });
+    resolver: zodResolver(studentSchema)
+  })
 
-  const [img, setImg] = useState<any>();
+  const [img, setImg] = useState<any>()
 
   const [state, formAction] = useFormState(
-    type === "create" ? createStudent : updateStudent,
+    type === 'create' ? createStudent : updateStudent,
     {
       success: false,
-      error: false,
+      error: false
     }
-  );
+  )
 
   const onSubmit = handleSubmit((data) => {
-    console.log("hello");
-    console.log(data);
-    formAction({ ...data, img: img?.secure_url });
-  });
+    console.log(data)
+    formAction({ ...data, img: img?.secure_url })
+  })
 
-  const router = useRouter();
+  const router = useRouter()
 
   useEffect(() => {
     if (state.success) {
-      toast(`Student has been ${type === "create" ? "created" : "updated"}!`);
-      setOpen(false);
-      router.refresh();
+      toast(`Student has been ${type === 'create' ? 'created' : 'updated'}!`)
+      setOpen(false)
+      router.refresh()
     }
-  }, [state, router, type, setOpen]);
+  }, [state, router, type, setOpen])
 
-  const { grades, classes } = relatedData;
+  const { grades, classes } = relatedData || {};
 
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
       <h1 className="text-xl font-semibold">
-        {type === "create" ? "Create a new student" : "Update the student"}
+        {type === 'create' ? 'Create a new student' : 'Update the student'}
       </h1>
       <span className="text-xs text-gray-400 font-medium">
         Authentication Information
@@ -99,8 +98,8 @@ const StudentForm = ({
       <CldUploadWidget
         uploadPreset="academy"
         onSuccess={(result, { widget }) => {
-          setImg(result.info);
-          widget.close();
+          setImg(result.info)
+          widget.close()
         }}
       >
         {({ open }) => {
@@ -111,8 +110,17 @@ const StudentForm = ({
             >
               <Image src="/upload.png" alt="" width={28} height={28} />
               <span>Upload a photo</span>
+              {img && (
+                <Image
+                  src={img.secure_url}
+                  alt="Uploaded Image"
+                  width={50}
+                  height={50}
+                  className="rounded-md"
+                />
+              )}
             </div>
-          );
+          )
         }}
       </CldUploadWidget>
       <div className="flex justify-between flex-wrap gap-4">
@@ -154,7 +162,7 @@ const StudentForm = ({
         <InputField
           label="Birthday"
           name="birthday"
-          defaultValue={data?.birthday.toISOString().split("T")[0]}
+          defaultValue={data?.birthday.toISOString().split('T')[0]}
           register={register}
           error={errors.birthday}
           type="date"
@@ -180,7 +188,7 @@ const StudentForm = ({
           <label className="text-xs text-gray-500">Sex</label>
           <select
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
-            {...register("sex")}
+            {...register('sex')}
             defaultValue={data?.sex}
           >
             <option value="MALE">Male</option>
@@ -196,10 +204,10 @@ const StudentForm = ({
           <label className="text-xs text-gray-500">Grade</label>
           <select
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
-            {...register("gradeId")}
+            {...register('gradeId')}
             defaultValue={data?.gradeId}
           >
-            {grades.map((grade: { id: number; level: number }) => (
+            {grades?.map((grade: { id: number; level: number }) => (
               <option value={grade.id} key={grade.id}>
                 {grade.level}
               </option>
@@ -215,19 +223,19 @@ const StudentForm = ({
           <label className="text-xs text-gray-500">Class</label>
           <select
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
-            {...register("classId")}
+            {...register('classId')}
             defaultValue={data?.classId}
           >
-            {classes.map(
+            {classes?.map(
               (classItem: {
-                id: number;
-                name: string;
-                capacity: number;
-                _count: { students: number };
+                id: number
+                name: string
+                capacity: number
+                _count: { students: number }
               }) => (
                 <option value={classItem.id} key={classItem.id}>
-                  ({classItem.name} -{" "}
-                  {classItem._count.students + "/" + classItem.capacity}{" "}
+                  ({classItem.name} -{' '}
+                  {classItem._count.students + '/' + classItem.capacity}{' '}
                   Capacity)
                 </option>
               )
@@ -244,10 +252,10 @@ const StudentForm = ({
         <span className="text-red-500">Something went wrong!</span>
       )}
       <button type="submit" className="bg-blue-400 text-white p-2 rounded-md">
-        {type === "create" ? "Create" : "Update"}
+        {type === 'create' ? 'Create' : 'Update'}
       </button>
     </form>
-  );
-};
+  )
+}
 
-export default StudentForm;
+export default StudentForm

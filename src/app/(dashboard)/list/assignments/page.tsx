@@ -33,44 +33,45 @@ const AssignmentListPage = async ({
 }: {
   searchParams: { [key: string]: string | undefined }
 }) => {
-  const {role, currentUserId} = await getUser();
-  const isAuthrizedRole = role === 'admin' || role === 'teacher';
+  const { role, currentUserId } = await getUser()
+  const isAuthrizedRole = role === 'admin' || role === 'teacher'
 
-  const assignmentHeaders = [...assignmentColHeaders, ...(isAuthrizedRole
-    ? [
-        {
-          header: "Actions",
-          key: "action",
-        },
-      ]
-    : []),
-  ];
+  const assignmentHeaders = [
+    ...assignmentColHeaders,
+    ...(isAuthrizedRole
+      ? [
+          {
+            header: 'Actions',
+            key: 'action'
+          }
+        ]
+      : [])
+  ]
 
-  
   const { page, ...queryParams } = searchParams
   const p = page ? parseInt(page as string) : 1
 
   // URL PARAMS CONDITION
-  const query: Prisma.AssignmentWhereInput = {};
-  query.lesson = {};
+  const query: Prisma.AssignmentWhereInput = {}
+  query.lesson = {}
 
   if (queryParams) {
     for (const [key, value] of Object.entries(queryParams)) {
       if (value !== undefined) {
         switch (key) {
-          case "classId":
-            query.lesson.classId = parseInt(value);
-            break;
-          case "teacherId":
-            query.lesson.teacherId = value;
-            break;
-          case "search":
+          case 'classId':
+            query.lesson.classId = parseInt(value)
+            break
+          case 'teacherId':
+            query.lesson.teacherId = value
+            break
+          case 'search':
             query.lesson.subject = {
-              name: { contains: value, mode: "insensitive" },
-            };
-            break;
+              name: { contains: value, mode: 'insensitive' }
+            }
+            break
           default:
-            break;
+            break
         }
       }
     }
@@ -78,31 +79,31 @@ const AssignmentListPage = async ({
 
   // ROLE CONDITIONS
   switch (role) {
-    case "admin":
-      break;
-    case "teacher":
-      query.lesson.teacherId = currentUserId!;
-      break;
-    case "student":
+    case 'admin':
+      break
+    case 'teacher':
+      query.lesson.teacherId = currentUserId!
+      break
+    case 'student':
       query.lesson.class = {
         students: {
           some: {
-            id: currentUserId!,
-          },
-        },
-      };
-      break;
-    case "parent":
+            id: currentUserId!
+          }
+        }
+      }
+      break
+    case 'parent':
       query.lesson.class = {
         students: {
           some: {
-            parentId: currentUserId!,
-          },
-        },
-      };
-      break;
+            parentId: currentUserId!
+          }
+        }
+      }
+      break
     default:
-      break;
+      break
   }
 
   // QUERY
@@ -124,46 +125,44 @@ const AssignmentListPage = async ({
     prisma.assignment.count({ where: query })
   ])
 
-
-const renderRow = (item: AssignmentList) => (
-  <tr
-    key={item.id}
-    className="border-b border-gray-100 even:bg-slate-50 text-sm hover:bg-blue-100"
-  >
-    <td className="flex items-center gap-4 p-3">
-      <h1 className="font-semibold text-xs md:text-sm">
-        {item.lesson.subject.name}
-      </h1>
-    </td>
-    <td className="text-xs md:text-sm">{item.lesson.class.name}</td>
-    <td className="text-xs md:text-sm hidden md:table-cell">
-      {item.lesson.teacher.name + ' ' + item.lesson.teacher.surname}
-    </td>
-    <td className="text-xs md:text-sm">
-      {new Intl.DateTimeFormat('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-      }).format(item.dueDate)}
-    </td>
-    <td>
-      <div className="flex items-center gap-2">
-        <Link href={`/list/classes/${item.id}`}>
-          <button className="w-7 h-7 flex items-center justify-center  rounded-full bg-blue-300 text-white hover:bg-blue-500 focus:outline-none">
-            <FontAwesomeIcon icon={faEye} className="w-4 h-4" />
-          </button>
-        </Link>
-        {isAuthrizedRole && (
-          <>
-            <FormModal table="assignment" type="update" id={item.id} />
-            <FormModal table="assignment" type="delete" id={item.id} />
-          </>
-        )}
-      </div>
-    </td>
-  </tr>
-)
-
+  const renderRow = (item: AssignmentList) => (
+    <tr
+      key={item.id}
+      className="border-b border-gray-100 even:bg-slate-50 text-sm hover:bg-blue-100"
+    >
+      <td className="flex items-center gap-4 p-3">
+        <h1 className="font-semibold text-xs md:text-sm">
+          {item.lesson.subject.name}
+        </h1>
+      </td>
+      <td className="text-xs md:text-sm">{item.lesson.class.name}</td>
+      <td className="text-xs md:text-sm hidden md:table-cell">
+        {item.lesson.teacher.name + ' ' + item.lesson.teacher.surname}
+      </td>
+      <td className="text-xs md:text-sm">
+        {new Intl.DateTimeFormat('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        }).format(item.dueDate)}
+      </td>
+      <td>
+        <div className="flex items-center gap-2">
+          <Link href={`/list/classes/${item.id}`}>
+            <button className="w-7 h-7 flex items-center justify-center  rounded-full bg-blue-300 text-white hover:bg-blue-500 focus:outline-none">
+              <FontAwesomeIcon icon={faEye} className="w-4 h-4" />
+            </button>
+          </Link>
+          {isAuthrizedRole && (
+            <>
+              <FormModal table="assignment" type="update" id={item.id} />
+              <FormModal table="assignment" type="delete" id={item.id} />
+            </>
+          )}
+        </div>
+      </td>
+    </tr>
+  )
 
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
@@ -182,11 +181,7 @@ const renderRow = (item: AssignmentList) => (
       </div>
 
       {/* Teacher List */}
-      <Table
-        colHeaders={assignmentHeaders}
-        renderRow={renderRow}
-        data={data}
-      />
+      <Table colHeaders={assignmentHeaders} renderRow={renderRow} data={data} />
       {/* Pagination */}
       <Pagination page={p} count={count} />
     </div>

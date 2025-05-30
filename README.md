@@ -1,6 +1,5 @@
 # Hedgie Academy Management System
 
-
 A modern, full-stack web application designed to streamline the administration of an academy/school. This system provides easy management of teachers, students, subjects, classes, exams, and more — all within an intuitive and responsive dashboard.
 
 ---
@@ -8,6 +7,7 @@ A modern, full-stack web application designed to streamline the administration o
 ## ✨ Key Features
 
 ### 🔧 **Admin Dashboard**
+
 - Dynamic overview of key statistics: student count, teacher count, class schedules, upcoming exams, events, announcements, etc.
 - Interactive charts and visualizations powered by **Recharts.js** for easy data insights.
 - List and detailed view of various type of data, including student, teacher, lessons, etc.
@@ -17,6 +17,7 @@ A modern, full-stack web application designed to streamline the administration o
 ---
 
 ### 📊 **Data Analytics**
+
 - Real-time summary widgets (e.g., total students/gender distribution, recent attendance).
 - Aggregated statistics for management tracking (annual spending and budget, exam results strength, etc.).
 - Visual charts powered by **Recharts.js** for easy insights.
@@ -24,6 +25,7 @@ A modern, full-stack web application designed to streamline the administration o
 ---
 
 ### 🗂️ **CRUD Management**
+
 The admin can perform CRUD operations on:
 
 - 🧑‍🏫 **Teachers**
@@ -41,6 +43,7 @@ The admin can perform CRUD operations on:
 ---
 
 ### 📅 **Schedule Calendar**
+
 - View all scheduled lessons and events by day or week.
 - **Teachers** can view their lessons for the week and events associated with their subjects.
 - **Students** can view their lessons for the week and upcoming events.
@@ -52,6 +55,7 @@ The admin can perform CRUD operations on:
 ---
 
 ### 🔐 **Role-Based Access Control (RBAC)**
+
 - **Admin:** Full access to manage all CRUD features and system settings.
 - **Teachers:** Can manage their own classes, subjects, events, announcements, view student performance, and see their weekly/daily class schedule in calendar mode.
 - **Students & Parents:** View their own data, grades, lessons, exams, schedules, events, and announcement, etc.
@@ -61,24 +65,27 @@ The admin can perform CRUD operations on:
 
 ### 🧩 **Tech Stack**
 
-- **Frontend:**  
-  - **Next.js** (App Router for scalable routing and server-side rendering)  
-  - **TypeScript** (For type safety and better developer experience)  
-  - **Tailwind CSS** (Utility-first CSS framework for rapid UI development)  
-  - **React Big Calendar** (For lesson scheduling and calendar management)  
-  - **React Toastify** (For showing toast notifications)  
+- **Frontend:**
+
+  - **Next.js** (App Router for scalable routing and server-side rendering)
+  - **TypeScript** (For type safety and better developer experience)
+  - **Tailwind CSS** (Utility-first CSS framework for rapid UI development)
+  - **React Big Calendar** (For lesson scheduling and calendar management)
+  - **React Toastify** (For showing toast notifications)
   - **Recharts.js** (For creating interactive charts and data visualizations)
   - **Clerk** (Authentication, role management, and access control for users)
 
-- **Backend:**  
-  - **Prisma ORM** (Object Relational Mapping for type-safe database queries)  
-  - **PostgreSQL** (Relational database to store data for users, lessons, subjects, etc.)  
+- **Backend:**
+
+  - **Prisma ORM** (Object Relational Mapping for type-safe database queries)
+  - **PostgreSQL** (Relational database to store data for users, lessons, subjects, etc.)
   - **Docker** (Containerization of the app for easier deployment and development)
 
-- **Cloud Services:**  
+- **Cloud Services:**
   - **Cloudinary** (For managing and hosting images like profile pictures)
 
 ---
+
 ## 🚀 Deployment Status
 
 This application is in the final stage of backend development and is being prepared for deployment.
@@ -89,4 +96,4 @@ This application is in the final stage of backend development and is being prepa
 
 ## Database ER Diagram:
 
- ![Entity Relationship](public/entity_relationship.png)
+![Entity Relationship](public/entity_relationship.png)

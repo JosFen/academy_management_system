@@ -1,32 +1,32 @@
-import { getUser } from "@/lib/auth/getUserRole";
-import { prisma } from "@/lib/prisma";
+import { getUser } from '@/lib/auth/getUserRole'
+import { prisma } from '@/lib/prisma'
 import Image from 'next/image'
 
 const Announcements = async () => {
-  const {role, currentUserId} = await getUser();
-  const isAuthrizedRole = role === 'admin';
+  const { role, currentUserId } = await getUser()
+  const isAuthrizedRole = role === 'admin'
 
   const roleConditions = {
     teacher: { lessons: { some: { teacherId: currentUserId! } } },
     student: { students: { some: { id: currentUserId! } } },
-    parent: { students: { some: { parentId: currentUserId! } } },
-  };
+    parent: { students: { some: { parentId: currentUserId! } } }
+  }
 
   const whereCondition = !isAuthrizedRole
     ? {
         OR: [
           { classId: null },
           {
-            class: roleConditions[role as keyof typeof roleConditions] || {},
-          },
-        ],
+            class: roleConditions[role as keyof typeof roleConditions] || {}
+          }
+        ]
       }
-    : {};
+    : {}
 
   const data = await prisma.announcement.findMany({
-    orderBy: { date: "desc" },
-    where: whereCondition,
-  });
+    orderBy: { date: 'desc' },
+    where: whereCondition
+  })
   return (
     <div className="bg-white p-3 rounded-xl">
       <div className="flex items-center justify-between">
@@ -52,7 +52,9 @@ const Announcements = async () => {
                 <h3 className="text-sm font-bold text-gray-600">
                   {announce.title}
                 </h3>
-                <p className="text-gray-400 text-xs">{new Intl.DateTimeFormat("en-US").format(announce.date)}</p>
+                <p className="text-gray-400 text-xs">
+                  {new Intl.DateTimeFormat('en-US').format(announce.date)}
+                </p>
               </div>
               <p className="mt-1 text-gray-500 text-sm">
                 {announce.description}

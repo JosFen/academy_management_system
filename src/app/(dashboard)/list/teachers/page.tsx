@@ -2,7 +2,7 @@ import Image from 'next/image'
 import TableSearch from '@/components/TableSearch'
 import Pagination from '@/components/Pagination'
 import Table from '@/components/Table'
-import { teacherColHeaders} from '@/lib/data'
+import { teacherColHeaders } from '@/lib/data'
 // import { it } from 'node:test'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -13,26 +13,28 @@ import { Class, Prisma, Subject, Teacher } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { ITEM_PER_PAGE } from '@/lib/settings'
 import { getUser } from '@/lib/auth/getUserRole'
+import FormContainer from '@/components/forms/FormContainer'
 
 type TeacherList = Teacher & { subjects: Subject[] } & { classes: Class[] }
-
 
 const TeacherListPage = async ({
   searchParams
 }: {
   searchParams: { [key: string]: string | undefined }
 }) => {
-  const {role, currentUserId} = await getUser();
-  const isAuthrizedRole = role === 'admin';
-  const teacherHeaders = [...teacherColHeaders, ...(isAuthrizedRole
-    ? [
-        {
-          header: "Actions",
-          key: "action",
-        },
-      ]
-    : []),
-  ];
+  const { role, currentUserId } = await getUser()
+  const isAuthrizedRole = role === 'admin'
+  const teacherHeaders = [
+    ...teacherColHeaders,
+    ...(isAuthrizedRole
+      ? [
+          {
+            header: 'Actions',
+            key: 'action'
+          }
+        ]
+      : [])
+  ]
   const { page, ...queryParams } = searchParams
   const p = page ? parseInt(page as string) : 1
 
@@ -70,7 +72,10 @@ const TeacherListPage = async ({
         classes: true
       },
       take: ITEM_PER_PAGE,
-      skip: (p - 1) * ITEM_PER_PAGE
+      skip: (p - 1) * ITEM_PER_PAGE,
+      orderBy: {
+        createdAt: 'desc'
+      }
     }),
     prisma.teacher.count({ where: query })
   ])
@@ -116,7 +121,7 @@ const TeacherListPage = async ({
             <>
               {/* <FormModal table="teacher" type="update" /> */}
               {/* <FormModal table="teacher" type="create" /> */}
-              <FormModal table="teacher" type="delete" id={item.id} />
+              <FormContainer table="teacher" type="delete" id={item.id} />
             </>
           )}
         </div>
@@ -135,7 +140,7 @@ const TeacherListPage = async ({
           <TableSearch />
           <div className="flex items-center gap-4 self-end">
             <ListManageButtons />
-            {isAuthrizedRole && <FormModal table="teacher" type="create" />}
+            {isAuthrizedRole && <FormContainer table="teacher" type="create" />}
           </div>
         </div>
       </div>

@@ -43,29 +43,29 @@
 
 // export default EventCalendar
 
-"use client";
+'use client'
 
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import Calendar from 'react-calendar'
+import 'react-calendar/dist/Calendar.css'
 
-type ValuePiece = Date | null;
+type ValuePiece = Date | null
 
-type Value = ValuePiece | [ValuePiece, ValuePiece];
+type Value = ValuePiece | [ValuePiece, ValuePiece]
 
 const EventCalendar = () => {
-  const [value, onChange] = useState<Value>(new Date());
+  const [value, onChange] = useState<Value>(new Date())
 
-  const router = useRouter();
+  const router = useRouter()
 
   useEffect(() => {
     if (value instanceof Date) {
-      router.push(`?date=${value}`);
+      router.push(`?date=${value}`)
     }
-  }, [value, router]);
+  }, [value, router])
 
-  return <Calendar onChange={onChange} value={value} />;
-};
+  return <Calendar onChange={onChange} value={value} />
+}
 
-export default EventCalendar;
+export default EventCalendar

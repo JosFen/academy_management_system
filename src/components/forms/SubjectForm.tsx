@@ -1,65 +1,65 @@
-"use client";
+'use client'
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import InputField from "../InputField";
-import { useFormState } from "react-dom";
-import { Dispatch, SetStateAction, useEffect } from "react";
-import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
-import { subjectSchema, SubjectSchema } from "@/lib/formValidationSchema";
-import { createSubject, updateSubject } from "@/lib/formActions";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import InputField from '../InputField'
+import { useFormState } from 'react-dom'
+import { Dispatch, SetStateAction, useEffect } from 'react'
+import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation'
+import { subjectSchema, SubjectSchema } from '@/lib/formValidationSchema'
+import { createSubject, updateSubject } from '@/lib/formActions'
 
 const SubjectForm = ({
   type,
   data,
   setOpen,
-  relatedData,
+  relatedData
 }: {
-  type: "create" | "update";
-  data?: any;
-  setOpen: Dispatch<SetStateAction<boolean>>;
-  relatedData?: any;
+  type: 'create' | 'update'
+  data?: any
+  setOpen: Dispatch<SetStateAction<boolean>>
+  relatedData?: any
 }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = useForm<SubjectSchema>({
-    resolver: zodResolver(subjectSchema),
-  });
+    resolver: zodResolver(subjectSchema)
+  })
 
   // AFTER REACT 19 IT'LL BE USEACTIONSTATE
 
   const [state, formAction] = useFormState(
-    type === "create" ? createSubject : updateSubject,
+    type === 'create' ? createSubject : updateSubject,
     {
       success: false,
-      error: false,
+      error: false
     }
-  );
+  )
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
-    formAction(data);
-  });
+    console.log(data)
+    formAction(data)
+  })
 
-  const router = useRouter();
+  const router = useRouter()
 
   useEffect(() => {
     if (state.success) {
-      toast(`Subject has been ${type === "create" ? "created" : "updated"}!`);
-      setOpen(false);
-      router.refresh();
+      toast(`Subject has been ${type === 'create' ? 'created' : 'updated'}!`)
+      setOpen(false)
+      router.refresh()
     }
-  }, [state, router, type, setOpen]);
+  }, [state, router, type, setOpen])
 
-  const { teachers } = relatedData;
+  const { teachers } = relatedData
 
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
       <h1 className="text-xl font-semibold">
-        {type === "create" ? "Create a new subject" : "Update the subject"}
+        {type === 'create' ? 'Create a new subject' : 'Update the subject'}
       </h1>
 
       <div className="flex justify-between flex-wrap gap-4">
@@ -85,13 +85,13 @@ const SubjectForm = ({
           <select
             multiple
             className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
-            {...register("teachers")}
+            {...register('teachers')}
             defaultValue={data?.teachers}
           >
             {teachers.map(
               (teacher: { id: string; name: string; surname: string }) => (
                 <option value={teacher.id} key={teacher.id}>
-                  {teacher.name + " " + teacher.surname}
+                  {teacher.name + ' ' + teacher.surname}
                 </option>
               )
             )}
@@ -107,10 +107,10 @@ const SubjectForm = ({
         <span className="text-red-500">Something went wrong!</span>
       )}
       <button className="bg-blue-400 text-white p-2 rounded-md">
-        {type === "create" ? "Create" : "Update"}
+        {type === 'create' ? 'Create' : 'Update'}
       </button>
     </form>
-  );
-};
+  )
+}
 
-export default SubjectForm;
+export default SubjectForm

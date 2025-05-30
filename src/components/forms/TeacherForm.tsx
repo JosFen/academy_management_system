@@ -56,7 +56,7 @@ const TeacherForm = ({
     }
   }, [state, router, type, setOpen]);
 
-  const { subjects } = relatedData;
+  const { subjects } = relatedData || {};
 
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
@@ -171,7 +171,7 @@ const TeacherForm = ({
             {...register("subjects")}
             defaultValue={data?.subjects}
           >
-            {subjects.map((subject: { id: number; name: string }) => (
+            {subjects?.map((subject: { id: number; name: string }) => (
               <option value={subject.id} key={subject.id}>
                 {subject.name}
               </option>
@@ -198,10 +198,20 @@ const TeacherForm = ({
               >
                 <Image src="/upload.png" alt="" width={28} height={28} />
                 <span>Upload a photo</span>
+                {img && (
+                <Image
+                  src={img.secure_url}
+                  alt="Uploaded Image"
+                  width={50}
+                  height={50}
+                  className="rounded-md"
+                />
+              )}
               </div>
             );
           }}
         </CldUploadWidget>
+        
       </div>
       {state.error && (
         <span className="text-red-500">Something went wrong!</span>

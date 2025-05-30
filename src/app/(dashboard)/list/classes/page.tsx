@@ -2,7 +2,7 @@ import Image from 'next/image'
 import TableSearch from '@/components/TableSearch'
 import Pagination from '@/components/Pagination'
 import Table from '@/components/Table'
-import { classColHeaders} from '@/lib/data'
+import { classColHeaders } from '@/lib/data'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
@@ -15,24 +15,25 @@ import { getUser } from '@/lib/auth/getUserRole'
 
 type ClassList = Class & { supervisor: Teacher }
 
-
 const ClassListPage = async ({
   searchParams
 }: {
   searchParams: { [key: string]: string | undefined }
 }) => {
-  const {role, currentUserId} = await getUser();
-  const isAuthrizedRole = role === 'admin';
+  const { role, currentUserId } = await getUser()
+  const isAuthrizedRole = role === 'admin'
 
-  const classHeaders = [...classColHeaders, ...(isAuthrizedRole
-    ? [
-        {
-          header: "Actions",
-          key: "action",
-        },
-      ]
-    : []),
-  ];
+  const classHeaders = [
+    ...classColHeaders,
+    ...(isAuthrizedRole
+      ? [
+          {
+            header: 'Actions',
+            key: 'action'
+          }
+        ]
+      : [])
+  ]
 
   const { page, ...queryParams } = searchParams
   const p = page ? parseInt(page as string) : 1
@@ -67,7 +68,6 @@ const ClassListPage = async ({
     }),
     prisma.class.count({ where: query })
   ])
-
 
   const renderRow = (item: ClassList) => (
     <tr

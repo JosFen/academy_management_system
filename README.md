@@ -84,13 +84,7 @@ The admin can perform CRUD operations on:
 - **Cloud Services:**
   - **Cloudinary** (For managing and hosting images like profile pictures)
 
----
 
-## 🚀 Deployment Status
-
-This application is in the final stage of backend development and is being prepared for deployment.
-🔧 Deployment pipeline and CI/CD setup are in progress.
-✅ Stay tuned for the live production URL.
 
 ---
 
